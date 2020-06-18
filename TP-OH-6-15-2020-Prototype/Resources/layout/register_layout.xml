@@ -1,7 +1,5 @@
-
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -9,7 +7,7 @@
     <TextView
         android:textAlignment="center"
         android:textSize="24dp"
-        android:text="TP Open House Demo"
+        android:text="New here?"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -17,10 +15,28 @@
         android:paddingLeft="4dp"
         android:paddingTop="20dp"
         android:textStyle="bold"
-        android:text="Login:"
+        android:text="Register:"
         android:textSize="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:padding="8dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+        <TextView
+            android:layout_weight="70"
+            android:text="Name:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/nameEditTextRegister"
+            android:layout_weight="30"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>/>
 
     <LinearLayout
         android:padding="8dp"
@@ -34,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <EditText
-            android:id="@+id/usernameEditTextLogin"
+            android:id="@+id/emailEditTextRegister"
             android:layout_weight="30"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -52,30 +68,38 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <EditText
-            android:id="@+id/passwordEditTextLogin"
             android:inputType="textPassword"
+            android:id="@+id/passwordEditTextRegister"
             android:layout_weight="30"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>/>
-    <Button
-        android:id="@+id/loginBtnLogin"
-        android:text="Login"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
 
-    <TextView
-        android:paddingTop="120dp"
-        android:textAlignment="center"
-        android:text="Not a member?"
+    <LinearLayout
+       
+        android:padding="8dp"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content">
+        
+        <TextView
+            android:layout_weight="70"
+            android:text="Re-Enter password:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:inputType="textPassword"
+            android:id="@+id/rePasswordEditTextRegister"
+            android:layout_weight="30"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>/>
 
     <Button
-        android:id="@+id/registerBtnLogin"
-        android:text="Register now!"
+        android:id="@+id/registerBtnRegister"
+        android:text="Register"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
 </LinearLayout>

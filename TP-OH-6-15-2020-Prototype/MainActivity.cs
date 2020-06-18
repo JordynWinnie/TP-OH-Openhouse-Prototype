@@ -7,6 +7,7 @@ using System;
 using System.Net.Http;
 using Newtonsoft.Json;
 using TP_OH_6_15_2020_Prototype.Models;
+using Android.Content;
 
 namespace TP_OH_6_15_2020_Prototype
 {
@@ -49,11 +50,17 @@ namespace TP_OH_6_15_2020_Prototype
 
         private void RegisterBtn_Click(object sender, EventArgs e)
         {
+            var intent = new Intent(this, typeof(RegisterActivity));
+            StartActivity(intent);
         }
 
         private async void LoginBtn_Click(object sender, EventArgs e)
         {
-            var response = await WebRequest.HttpClient.GetAsync($"http://10.0.2.2:54888/Users/Login?email={emailEditText.Text}&password={passwordEditText.Text}");
+            //Access the HttpClient Singleton process to login GET:
+            var response = await
+                WebRequest.HttpClient.GetAsync($"http://10.0.2.2:54888/Users/Login?email={emailEditText.Text}&password={passwordEditText.Text}");
+
+            //Only allow login when success:
             if (response.IsSuccessStatusCode)
             {
                 var user = JsonConvert.DeserializeObject<UserModel>(await response.Content.ReadAsStringAsync());
