@@ -24,7 +24,7 @@ namespace TP_OH_IIT_2020_API.Controllers
             var user = db.Users.Where(x => x.email.Equals(email) && x.password.Equals(password));
             if (user.Any())
             {
-                return Json(user, JsonRequestBehavior.AllowGet);
+                return Json(user.First(), JsonRequestBehavior.AllowGet);
             }
 
             return HttpNotFound();

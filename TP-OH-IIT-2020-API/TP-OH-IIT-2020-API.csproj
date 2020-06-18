@@ -186,6 +186,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="mainEventTiming.cs">
+      <DependentUpon>TP-OH-Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuestionsTable.cs">
       <DependentUpon>TP-OH-Model.tt</DependentUpon>
