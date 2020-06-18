@@ -30,6 +30,37 @@ namespace TP_OH_IIT_2020_API.Controllers
             return HttpNotFound();
         }
 
+        public ActionResult RegisterNewUser(string name, string email, string password)
+        {
+            var insertUser = new User
+            {
+                username = name,
+                password = password,
+                email = email,
+                credits = 0,
+                isAdmin = false
+            };
+
+            var checkEmail = db.Users.Where(x => x.email.Equals(email)).Any();
+
+            if (checkEmail)
+            {
+                return Json("Already Registered", JsonRequestBehavior.AllowGet);
+            }
+            db.Users.Add(insertUser);
+
+            try
+            {
+                db.SaveChanges();
+                return Json(insertUser, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw;
+            }
+        }
+
         // GET: Users
         public ActionResult Index()
         {
