@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -34,6 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <EditText
+            android:id="@+id/usernameEditTextLogin"
             android:layout_weight="30"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -51,12 +52,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <EditText
+            android:id="@+id/passwordEditTextLogin"
             android:inputType="textPassword"
             android:layout_weight="30"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>/>
     <Button
+        android:id="@+id/loginBtnLogin"
         android:text="Login"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
@@ -70,6 +73,7 @@
         android:layout_height="wrap_content"/>
 
     <Button
+        android:id="@+id/registerBtnLogin"
         android:text="Register now!"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
