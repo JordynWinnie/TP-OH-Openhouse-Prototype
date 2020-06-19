@@ -66,6 +66,7 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DetailedEventViewActivity.cs" />
     <Compile Include="EventListActivity.cs" />
     <Compile Include="EventListAdapter.cs" />
     <Compile Include="MainActivity.cs" />
@@ -142,6 +143,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\event_grid_layout.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\event_detailed_view_layout.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

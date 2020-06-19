@@ -14,6 +14,7 @@ namespace TP_OH_6_15_2020_Prototype.Models
 {
     public class EventModel
     {
+        public int eventID { get; set; }
         public string eventName { get; set; }
         public string eventDescription { get; set; }
         public int creditsToEarn { get; set; }
@@ -21,6 +22,8 @@ namespace TP_OH_6_15_2020_Prototype.Models
         public string courseShortName { get; set; }
         public string courseCode { get; set; }
         public string qrCodeString { get; set; }
+
+        public string invitationLink { get; set; }
         public List<EventTimingModel> EventTimings { get; set; }
     }
 }

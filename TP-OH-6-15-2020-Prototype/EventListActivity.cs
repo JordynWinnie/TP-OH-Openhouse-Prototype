@@ -92,7 +92,10 @@ namespace TP_OH_6_15_2020_Prototype
 
         private void EventListView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            Toast.MakeText(this, "Clicked on " + eventList[e.Position].eventName, ToastLength.Short).Show();
+            Toast.MakeText(this, "Clicked on " + eventList[e.Position].eventID, ToastLength.Short).Show();
+            Intent intent = new Intent(this, typeof(DetailedEventViewActivity));
+            intent.PutExtra("eventid", eventList[e.Position].eventID);
+            StartActivity(intent);
         }
 
         private void CourseSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
@@ -128,7 +131,7 @@ namespace TP_OH_6_15_2020_Prototype
                         }
                     }
                 }
-                eventList = tempEventList;
+                eventList = tempEventList.Distinct().ToList();
             }
 
             if (!endTimeEditText.Text.Equals(string.Empty))
@@ -139,13 +142,13 @@ namespace TP_OH_6_15_2020_Prototype
                 {
                     foreach (var timing in item.EventTimings)
                     {
-                        if (timing.endTimeOfEvent <= endTimingSelected.ToUniversalTime())
+                        if (timing.startTimeOfEvent <= endTimingSelected.ToUniversalTime())
                         {
                             tempEventList.Add(item);
                         }
                     }
                 }
-                eventList = tempEventList;
+                eventList = tempEventList.Distinct().ToList();
             }
             eventListView.Adapter = new EventListAdapter(eventList, this);
         }
