@@ -39,6 +39,7 @@ namespace TP_OH_IIT_2020_API
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<mainEventTiming> mainEventTimings { get; set; }
+        public virtual DbSet<CourseTable> CourseTables { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

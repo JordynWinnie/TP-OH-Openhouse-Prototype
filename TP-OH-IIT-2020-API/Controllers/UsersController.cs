@@ -19,6 +19,17 @@ namespace TP_OH_IIT_2020_API.Controllers
             db.Configuration.LazyLoadingEnabled = false;
         }
 
+        public ActionResult GetUserInfo(int userid)
+        {
+            var user = db.Users.Where(x => x.userid == userid);
+            if (user.Any())
+            {
+                return Json(user.First(), JsonRequestBehavior.AllowGet);
+            }
+
+            return HttpNotFound();
+        }
+
         public ActionResult Login(string email, string password)
         {
             var user = db.Users.Where(x => x.email.Equals(email) && x.password.Equals(password));

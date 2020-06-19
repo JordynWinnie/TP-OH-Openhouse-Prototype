@@ -32,11 +32,15 @@
           <Property Name="awardLimit" Type="int" Nullable="false" />
           <Property Name="creditsRequired" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'TP-OH-IIT-2020.dbo.CreditsTable' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="CreditsTable">
-          <Property Name="eventID" Type="nchar" MaxLength="10" />
-        </EntityType>-->
+        <EntityType Name="CourseTable">
+          <Key>
+            <PropertyRef Name="courseID" />
+          </Key>
+          <Property Name="courseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="courseName" Type="varchar(max)" Nullable="false" />
+          <Property Name="courseShortName" Type="varchar(max)" Nullable="false" />
+          <Property Name="courseCode" Type="varchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="EarnedCreditsFromEventTable">
           <Key>
             <PropertyRef Name="creditEventID" />
@@ -53,6 +57,7 @@ warning 6013: The table/view 'TP-OH-IIT-2020.dbo.CreditsTable' does not have a p
           <Property Name="eventName" Type="varchar(max)" Nullable="false" />
           <Property Name="eventDescription" Type="varchar(max)" />
           <Property Name="creditsToEarn" Type="int" Nullable="false" />
+          <Property Name="courseIDFK" Type="int" Nullable="false" />
           <Property Name="qrCodeString" Type="varchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="EventTimings">
@@ -178,6 +183,18 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_EventsTable_CourseTable">
+          <End Role="CourseTable" Type="Self.CourseTable" Multiplicity="1" />
+          <End Role="EventsTable" Type="Self.EventsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseTable">
+              <PropertyRef Name="courseID" />
+            </Principal>
+            <Dependent Role="EventsTable">
+              <PropertyRef Name="courseIDFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_EventTimings_EventsTable">
           <End Role="EventsTable" Type="Self.EventsTable" Multiplicity="1" />
           <End Role="EventTimings" Type="Self.EventTimings" Multiplicity="*" />
@@ -261,6 +278,7 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
           <EntitySet Name="AnswersTable" EntityType="Self.AnswersTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AwardRedemption" EntityType="Self.AwardRedemption" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AwardsTable" EntityType="Self.AwardsTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CourseTable" EntityType="Self.CourseTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EarnedCreditsFromEventTable" EntityType="Self.EarnedCreditsFromEventTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EventsTable" EntityType="Self.EventsTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EventTimings" EntityType="Self.EventTimings" Schema="dbo" store:Type="Tables" />
@@ -293,6 +311,10 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
           <AssociationSet Name="FK_EarnedCreditsFromEventTable_User" Association="Self.FK_EarnedCreditsFromEventTable_User">
             <End Role="User" EntitySet="User" />
             <End Role="EarnedCreditsFromEventTable" EntitySet="EarnedCreditsFromEventTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventsTable_CourseTable" Association="Self.FK_EventsTable_CourseTable">
+            <End Role="CourseTable" EntitySet="CourseTable" />
+            <End Role="EventsTable" EntitySet="EventsTable" />
           </AssociationSet>
           <AssociationSet Name="FK_EventTimings_EventsTable" Association="Self.FK_EventTimings_EventsTable">
             <End Role="EventsTable" EntitySet="EventsTable" />
@@ -367,6 +389,8 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
           <Property Name="qrCodeString" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="EarnedCreditsFromEventTables" Relationship="Self.FK_EarnedCreditsFromEventTable_EventsTable" FromRole="EventsTable" ToRole="EarnedCreditsFromEventTable" />
           <NavigationProperty Name="EventTimings" Relationship="Self.FK_EventTimings_EventsTable" FromRole="EventsTable" ToRole="EventTimings" />
+          <Property Name="courseIDFK" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CourseTable" Relationship="TPOHModel.FK_EventsTable_CourseTable" FromRole="EventsTable" ToRole="CourseTable" />
         </EntityType>
         <EntityType Name="EventTiming">
           <Key>
@@ -620,6 +644,11 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
           <EntitySet Name="mainEventTimings" EntityType="TPOHModel.mainEventTiming" />
+          <EntitySet Name="CourseTables" EntityType="TPOHModel.CourseTable" />
+          <AssociationSet Name="FK_EventsTable_CourseTable" Association="TPOHModel.FK_EventsTable_CourseTable">
+            <End Role="CourseTable" EntitySet="CourseTables" />
+            <End Role="EventsTable" EntitySet="EventsTables" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -638,6 +667,28 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
           </Key>
           <Property Name="eventStartTime" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
+        <EntityType Name="CourseTable">
+          <Key>
+            <PropertyRef Name="courseID" />
+          </Key>
+          <Property Name="courseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="courseName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="courseShortName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="courseCode" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EventsTables" Relationship="TPOHModel.FK_EventsTable_CourseTable" FromRole="CourseTable" ToRole="EventsTable" />
+        </EntityType>
+        <Association Name="FK_EventsTable_CourseTable">
+          <End Type="TPOHModel.CourseTable" Role="CourseTable" Multiplicity="1" />
+          <End Type="TPOHModel.EventsTable" Role="EventsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseTable">
+              <PropertyRef Name="courseID" />
+            </Principal>
+            <Dependent Role="EventsTable">
+              <PropertyRef Name="courseIDFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -686,6 +737,7 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
           <EntitySetMapping Name="EventsTables">
             <EntityTypeMapping TypeName="TPOHModel.EventsTable">
               <MappingFragment StoreEntitySet="EventsTable">
+                <ScalarProperty Name="courseIDFK" ColumnName="courseIDFK" />
                 <ScalarProperty Name="eventID" ColumnName="eventID" />
                 <ScalarProperty Name="eventName" ColumnName="eventName" />
                 <ScalarProperty Name="eventDescription" ColumnName="eventDescription" />
@@ -783,6 +835,16 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
             <EntityTypeMapping TypeName="TPOHModel.mainEventTiming">
               <MappingFragment StoreEntitySet="mainEventTiming">
                 <ScalarProperty Name="eventStartTime" ColumnName="eventStartTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourseTables">
+            <EntityTypeMapping TypeName="TPOHModel.CourseTable">
+              <MappingFragment StoreEntitySet="CourseTable">
+                <ScalarProperty Name="courseCode" ColumnName="courseCode" />
+                <ScalarProperty Name="courseShortName" ColumnName="courseShortName" />
+                <ScalarProperty Name="courseName" ColumnName="courseName" />
+                <ScalarProperty Name="courseID" ColumnName="courseID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

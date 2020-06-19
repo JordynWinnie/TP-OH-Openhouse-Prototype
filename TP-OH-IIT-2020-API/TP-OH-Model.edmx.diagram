@@ -26,6 +26,8 @@
         <AssociationConnector Association="TPOHModel.FK_QuizAttempts_QuizTable" ManuallyRouted="false" />
         <AssociationConnector Association="TPOHModel.FK_QuizAttempts_User" ManuallyRouted="false" />
         <EntityTypeShape EntityType="TPOHModel.mainEventTiming" Width="1.5" PointX="5.375" PointY="4.75" />
+        <EntityTypeShape EntityType="TPOHModel.CourseTable" Width="1.5" PointX="0.75" PointY="15.125" />
+        <AssociationConnector Association="TPOHModel.FK_EventsTable_CourseTable" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

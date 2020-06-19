@@ -26,10 +26,12 @@ namespace TP_OH_IIT_2020_API
         public string eventDescription { get; set; }
         public int creditsToEarn { get; set; }
         public string qrCodeString { get; set; }
+        public int courseIDFK { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EarnedCreditsFromEventTable> EarnedCreditsFromEventTables { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EventTiming> EventTimings { get; set; }
+        public virtual CourseTable CourseTable { get; set; }
     }
 }
