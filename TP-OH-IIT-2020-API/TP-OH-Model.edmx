@@ -66,8 +66,8 @@
           </Key>
           <Property Name="eventTimingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="eventIDFK" Type="int" Nullable="false" />
-          <Property Name="startTimeOfEvent" Type="datetime" Nullable="false" />
-          <Property Name="endTimeOfEvent" Type="datetime" Nullable="false" />
+          <Property Name="startTimeOfEvent" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="endTimeOfEvent" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -400,8 +400,8 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
           <Property Name="eventTimingID" Type="Int32" Nullable="false" />
           <Property Name="eventIDFK" Type="Int32" Nullable="false" />
           <NavigationProperty Name="EventsTable" Relationship="Self.FK_EventTimings_EventsTable" FromRole="EventTimings" ToRole="EventsTable" />
-          <Property Name="startTimeOfEvent" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="endTimeOfEvent" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="startTimeOfEvent" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="endTimeOfEvent" Type="DateTime" Nullable="false" Precision="7" />
         </EntityType>
         <EntityType Name="QuestionsTable">
           <Key>

@@ -1,135 +1,126 @@
-﻿using System.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
+using TP_OH_IIT_2020_API;
 
 namespace TP_OH_IIT_2020_API.Controllers
 {
-    public class EventsTablesController : Controller
+    public class CourseTablesController : Controller
     {
         private TPOHEntities db = new TPOHEntities();
 
-        public EventsTablesController()
+        public CourseTablesController()
         {
             db.Configuration.LazyLoadingEnabled = false;
         }
 
-        public ActionResult GetEvents()
-        {
-            var events = from x in db.EventsTables
-                         select new
-                         {
-                             x.eventName,
-                             x.eventDescription,
-                             x.creditsToEarn,
-                             x.CourseTable.courseName,
-                             x.CourseTable.courseShortName,
-                             x.CourseTable.courseCode,
-                             x.qrCodeString,
-                             x.EventTimings
-                         };
-
-            return Json(events, JsonRequestBehavior.AllowGet);
-        }
-
-        // GET: EventsTables
+        // GET: CourseTables
         public ActionResult Index()
         {
-            return View(db.EventsTables.ToList());
+            return View(db.CourseTables.ToList());
         }
 
-        // GET: EventsTables/Details/5
+        public ActionResult GetCourses()
+        {
+            return Json(db.CourseTables, JsonRequestBehavior.AllowGet);
+        }
+
+        // GET: CourseTables/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            EventsTable eventsTable = db.EventsTables.Find(id);
-            if (eventsTable == null)
+            CourseTable courseTable = db.CourseTables.Find(id);
+            if (courseTable == null)
             {
                 return HttpNotFound();
             }
-            return View(eventsTable);
+            return View(courseTable);
         }
 
-        // GET: EventsTables/Create
+        // GET: CourseTables/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: EventsTables/Create
+        // POST: CourseTables/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "eventID,eventName,eventDescription,creditsToEarn,qrCodeString")] EventsTable eventsTable)
+        public ActionResult Create([Bind(Include = "courseID,courseName,courseShortName,courseCode")] CourseTable courseTable)
         {
             if (ModelState.IsValid)
             {
-                db.EventsTables.Add(eventsTable);
+                db.CourseTables.Add(courseTable);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(eventsTable);
+            return View(courseTable);
         }
 
-        // GET: EventsTables/Edit/5
+        // GET: CourseTables/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            EventsTable eventsTable = db.EventsTables.Find(id);
-            if (eventsTable == null)
+            CourseTable courseTable = db.CourseTables.Find(id);
+            if (courseTable == null)
             {
                 return HttpNotFound();
             }
-            return View(eventsTable);
+            return View(courseTable);
         }
 
-        // POST: EventsTables/Edit/5
+        // POST: CourseTables/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "eventID,eventName,eventDescription,creditsToEarn,qrCodeString")] EventsTable eventsTable)
+        public ActionResult Edit([Bind(Include = "courseID,courseName,courseShortName,courseCode")] CourseTable courseTable)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(eventsTable).State = EntityState.Modified;
+                db.Entry(courseTable).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(eventsTable);
+            return View(courseTable);
         }
 
-        // GET: EventsTables/Delete/5
+        // GET: CourseTables/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            EventsTable eventsTable = db.EventsTables.Find(id);
-            if (eventsTable == null)
+            CourseTable courseTable = db.CourseTables.Find(id);
+            if (courseTable == null)
             {
                 return HttpNotFound();
             }
-            return View(eventsTable);
+            return View(courseTable);
         }
 
-        // POST: EventsTables/Delete/5
+        // POST: CourseTables/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            EventsTable eventsTable = db.EventsTables.Find(id);
-            db.EventsTables.Remove(eventsTable);
+            CourseTable courseTable = db.CourseTables.Find(id);
+            db.CourseTables.Remove(courseTable);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
