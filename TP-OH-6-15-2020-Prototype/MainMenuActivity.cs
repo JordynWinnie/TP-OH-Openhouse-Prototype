@@ -54,6 +54,8 @@ namespace TP_OH_6_15_2020_Prototype
 
         private void ViewEventBtn_Click(object sender, EventArgs e)
         {
+            var intent = new Intent(this, typeof(EventListActivity));
+            StartActivity(intent);
         }
     }
 }

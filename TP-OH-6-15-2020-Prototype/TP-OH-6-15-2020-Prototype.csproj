@@ -66,8 +66,13 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EventListActivity.cs" />
+    <Compile Include="EventListAdapter.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MainMenuActivity.cs" />
+    <Compile Include="Models\CourseModel.cs" />
+    <Compile Include="Models\EventModel.cs" />
+    <Compile Include="Models\EventTimingModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="RegisterActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
@@ -127,6 +132,16 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\main_menu_layout.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\main_events_layout.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\event_grid_layout.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
