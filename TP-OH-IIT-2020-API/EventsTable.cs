@@ -27,6 +27,7 @@ namespace TP_OH_IIT_2020_API
         public int creditsToEarn { get; set; }
         public string qrCodeString { get; set; }
         public int courseIDFK { get; set; }
+        public string invitationLink { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EarnedCreditsFromEventTable> EarnedCreditsFromEventTables { get; set; }

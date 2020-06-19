@@ -59,6 +59,7 @@
           <Property Name="creditsToEarn" Type="int" Nullable="false" />
           <Property Name="courseIDFK" Type="int" Nullable="false" />
           <Property Name="qrCodeString" Type="varchar(max)" Nullable="false" />
+          <Property Name="invitationLink" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="EventTimings">
           <Key>
@@ -392,6 +393,7 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
           <NavigationProperty Name="EventTimings" Relationship="Self.FK_EventTimings_EventsTable" FromRole="EventsTable" ToRole="EventTimings" />
           <Property Name="courseIDFK" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CourseTable" Relationship="TPOHModel.FK_EventsTable_CourseTable" FromRole="EventsTable" ToRole="CourseTable" />
+          <Property Name="invitationLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="EventTiming">
           <Key>
@@ -739,6 +741,7 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
           <EntitySetMapping Name="EventsTables">
             <EntityTypeMapping TypeName="TPOHModel.EventsTable">
               <MappingFragment StoreEntitySet="EventsTable">
+                <ScalarProperty Name="invitationLink" ColumnName="invitationLink" />
                 <ScalarProperty Name="courseIDFK" ColumnName="courseIDFK" />
                 <ScalarProperty Name="eventID" ColumnName="eventID" />
                 <ScalarProperty Name="eventName" ColumnName="eventName" />

@@ -15,22 +15,46 @@ namespace TP_OH_IIT_2020_API.Controllers
             db.Configuration.LazyLoadingEnabled = false;
         }
 
-        public ActionResult GetEvents()
+        public ActionResult GetEvents(int? id)
         {
-            var events = from x in db.EventsTables
-                         select new
-                         {
-                             x.eventName,
-                             x.eventDescription,
-                             x.creditsToEarn,
-                             x.CourseTable.courseName,
-                             x.CourseTable.courseShortName,
-                             x.CourseTable.courseCode,
-                             x.qrCodeString,
-                             x.EventTimings
-                         };
-
-            return Json(events, JsonRequestBehavior.AllowGet);
+            if (id != null)
+            {
+                var events = from x in db.EventsTables
+                             where x.eventID == id && x.EventTimings.Count > 0
+                             select new
+                             {
+                                 x.eventID,
+                                 x.eventName,
+                                 x.eventDescription,
+                                 x.creditsToEarn,
+                                 x.CourseTable.courseName,
+                                 x.CourseTable.courseShortName,
+                                 x.CourseTable.courseCode,
+                                 x.qrCodeString,
+                                 x.EventTimings,
+                                 x.invitationLink
+                             };
+                return Json(events.First(), JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var events = from x in db.EventsTables
+                             where x.EventTimings.Count > 0
+                             select new
+                             {
+                                 x.eventID,
+                                 x.eventName,
+                                 x.eventDescription,
+                                 x.creditsToEarn,
+                                 x.CourseTable.courseName,
+                                 x.CourseTable.courseShortName,
+                                 x.CourseTable.courseCode,
+                                 x.qrCodeString,
+                                 x.EventTimings,
+                                 x.invitationLink
+                             };
+                return Json(events, JsonRequestBehavior.AllowGet);
+            }
         }
 
         // GET: EventsTables
