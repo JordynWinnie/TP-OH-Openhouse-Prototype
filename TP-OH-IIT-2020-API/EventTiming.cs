@@ -16,7 +16,8 @@ namespace TP_OH_IIT_2020_API
     {
         public int eventTimingID { get; set; }
         public int eventIDFK { get; set; }
-        public System.DateTime timeOfEvent { get; set; }
+        public System.DateTime startTimeOfEvent { get; set; }
+        public System.DateTime endTimeOfEvent { get; set; }
     
         public virtual EventsTable EventsTable { get; set; }
     }
