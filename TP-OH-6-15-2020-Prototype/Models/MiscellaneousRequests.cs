@@ -25,6 +25,8 @@ namespace TP_OH_6_15_2020_Prototype.Models
             public int questionID { get; set; }
             public string questionString { get; set; }
             public string questionHint { get; set; }
+
+            public string? questionTrivia { get; set; }
         }
 
         internal class Answer
