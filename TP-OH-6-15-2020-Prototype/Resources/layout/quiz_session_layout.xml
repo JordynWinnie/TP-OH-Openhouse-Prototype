@@ -1,0 +1,85 @@
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:gridSpec="0|8|#0093eeff|K:#ee8700ff:16,l:72,l:16,r|S:#83ee00ff:16,0,l:16,56,l:16,0,r">
+    <TextView
+        android:id="@+id/quizNameSession"
+        android:textStyle="bold"
+        android:text="QuizName"
+        android:textSize="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:text="QuizDescription"
+        android:textSize="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/quizNameSession"
+        android:id="@+id/quizDescription" />
+
+    <TextView
+        android:id="@+id/miscInfoTextView"
+        android:textAlignment="center"
+        android:layout_above="@id/startQuizButton"
+        android:text="MiscInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:text="Start Quiz"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/startQuizButton" />
+
+    <TextView
+        android:textSize="24dp"
+        android:textAlignment="center"
+        android:layout_below="@id/quizDescription"
+        android:text="QuizQuestion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/quizQuestion" />
+
+    <TextView
+        android:id="@+id/questionHint"
+        android:text="Question Hint"
+        android:layout_below="@id/quizQuestion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:id="@+id/answerLayout"
+        android:orientation="vertical"
+        android:layout_below="@id/questionHint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/answerOneButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/answerTwoButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/answerThreeButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/answerFourButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/leaderBoardListView"
+        android:layout_below="@id/quizDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>

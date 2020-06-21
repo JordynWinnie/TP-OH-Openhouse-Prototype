@@ -18,6 +18,7 @@ namespace TP_OH_6_15_2020_Prototype
         private EditText passwordEditText;
         private Button loginBtn;
         private Button registerBtn;
+        private Button shortCutButton;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -43,9 +44,17 @@ namespace TP_OH_6_15_2020_Prototype
             passwordEditText = FindViewById<EditText>(Resource.Id.passwordEditTextLogin);
             loginBtn = FindViewById<Button>(Resource.Id.loginBtnLogin);
             registerBtn = FindViewById<Button>(Resource.Id.registerBtnLogin);
+            shortCutButton = FindViewById<Button>(Resource.Id.testingButton);
 
             loginBtn.Click += LoginBtn_Click;
             registerBtn.Click += RegisterBtn_Click;
+            shortCutButton.Click += ShortCutButton_Click;
+        }
+
+        private void ShortCutButton_Click(object sender, EventArgs e)
+        {
+            var intent = new Intent(this, typeof(QuizSessionActivity));
+            StartActivity(intent);
         }
 
         private void RegisterBtn_Click(object sender, EventArgs e)
