@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MoreLinq;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -19,18 +21,49 @@ namespace TP_OH_IIT_2020_API.Controllers
             db.Configuration.LazyLoadingEnabled = false;
         }
 
-        public ActionResult GetQuizList()
+        public ActionResult ReturnLeaderBoardForQuiz(int quizID)
         {
-            var quizes = from x in db.QuizTables
-                         select new
-                         {
-                             x.quizID,
-                             x.quizName,
-                             x.quizDescription,
-                             quizQuestionCount = x.QuestionsTables.Count,
-                             x.quizCredits
-                         };
-            return Json(quizes, JsonRequestBehavior.AllowGet);
+            var quizLeaderBoard = (from x in db.QuizAttempts
+                                   where x.quizIDFK == quizID
+                                   orderby x.score descending
+                                   select new
+                                   {
+                                       x.User.username,
+                                       x.score
+                                   }).DistinctBy(x => x.username);
+
+            return Json(quizLeaderBoard.Take(5), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetQuizList(int? quizID)
+        {
+            if (quizID != null)
+            {
+                var quizes = from x in db.QuizTables
+                             where x.quizID == quizID
+                             select new
+                             {
+                                 x.quizID,
+                                 x.quizName,
+                                 x.quizDescription,
+                                 quizQuestionCount = x.QuestionsTables.Count,
+                                 x.quizCredits
+                             };
+                return Json(quizes.First(), JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var quizes = from x in db.QuizTables
+                             select new
+                             {
+                                 x.quizID,
+                                 x.quizName,
+                                 x.quizDescription,
+                                 quizQuestionCount = x.QuestionsTables.Count,
+                                 x.quizCredits
+                             };
+                return Json(quizes, JsonRequestBehavior.AllowGet);
+            }
         }
 
         public ActionResult GetQuizQuestions(int quizID)
