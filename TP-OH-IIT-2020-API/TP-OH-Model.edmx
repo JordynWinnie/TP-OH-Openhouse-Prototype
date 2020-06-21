@@ -13,6 +13,7 @@
           <Property Name="answerString" Type="varchar(max)" Nullable="false" />
           <Property Name="questionID" Type="int" Nullable="false" />
           <Property Name="isCorrectAnswer" Type="bit" Nullable="false" />
+          <Property Name="answerTrivia" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="AwardRedemption">
           <Key>
@@ -103,6 +104,7 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
           <Property Name="quizID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="quizName" Type="varchar(max)" Nullable="false" />
           <Property Name="quizDescription" Type="varchar(max)" />
+          <Property Name="quizCredits" Type="int" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -348,6 +350,7 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
           <Property Name="questionID" Type="Int32" Nullable="false" />
           <Property Name="isCorrectAnswer" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="QuestionsTable" Relationship="Self.FK_AnswersTable_QuestionsTable" FromRole="AnswersTable" ToRole="QuestionsTable" />
+          <Property Name="answerTrivia" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="AwardRedemption">
           <Key>
@@ -436,6 +439,7 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
           <Property Name="quizDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="QuestionsTables" Relationship="Self.FK_QuestionsTable_QuizTable" FromRole="QuizTable" ToRole="QuestionsTable" />
           <NavigationProperty Name="QuizAttempts" Relationship="Self.FK_QuizAttempts_QuizTable" FromRole="QuizTable" ToRole="QuizAttempts" />
+          <Property Name="quizCredits" Type="Int32" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -702,6 +706,7 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
           <EntitySetMapping Name="AnswersTables">
             <EntityTypeMapping TypeName="TPOHModel.AnswersTable">
               <MappingFragment StoreEntitySet="AnswersTable">
+                <ScalarProperty Name="answerTrivia" ColumnName="answerTrivia" />
                 <ScalarProperty Name="answerID" ColumnName="answerID" />
                 <ScalarProperty Name="answerString" ColumnName="answerString" />
                 <ScalarProperty Name="questionID" ColumnName="questionID" />
@@ -784,6 +789,7 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
           <EntitySetMapping Name="QuizTables">
             <EntityTypeMapping TypeName="TPOHModel.QuizTable">
               <MappingFragment StoreEntitySet="QuizTable">
+                <ScalarProperty Name="quizCredits" ColumnName="quizCredits" />
                 <ScalarProperty Name="quizID" ColumnName="quizID" />
                 <ScalarProperty Name="quizName" ColumnName="quizName" />
                 <ScalarProperty Name="quizDescription" ColumnName="quizDescription" />

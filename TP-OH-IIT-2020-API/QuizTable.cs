@@ -24,6 +24,7 @@ namespace TP_OH_IIT_2020_API
         public int quizID { get; set; }
         public string quizName { get; set; }
         public string quizDescription { get; set; }
+        public Nullable<int> quizCredits { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<QuestionsTable> QuestionsTables { get; set; }

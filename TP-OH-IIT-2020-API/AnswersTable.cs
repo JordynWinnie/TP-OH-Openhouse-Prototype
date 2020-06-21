@@ -18,6 +18,7 @@ namespace TP_OH_IIT_2020_API
         public string answerString { get; set; }
         public int questionID { get; set; }
         public bool isCorrectAnswer { get; set; }
+        public string answerTrivia { get; set; }
     
         public virtual QuestionsTable QuestionsTable { get; set; }
     }

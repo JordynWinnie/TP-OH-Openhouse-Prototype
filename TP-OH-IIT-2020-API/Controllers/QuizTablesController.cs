@@ -27,7 +27,8 @@ namespace TP_OH_IIT_2020_API.Controllers
                              x.quizID,
                              x.quizName,
                              x.quizDescription,
-                             quizQuestionCount = x.QuestionsTables.Count
+                             quizQuestionCount = x.QuestionsTables.Count,
+                             x.quizCredits
                          };
             return Json(quizes, JsonRequestBehavior.AllowGet);
         }
@@ -40,7 +41,7 @@ namespace TP_OH_IIT_2020_API.Controllers
                        {
                            x.questionID,
                            x.questionString,
-                           x.questionHint
+                           x.questionHint,
                        };
 
             return Json(quiz, JsonRequestBehavior.AllowGet);
