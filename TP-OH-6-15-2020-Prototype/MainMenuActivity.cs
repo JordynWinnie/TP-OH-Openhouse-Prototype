@@ -50,6 +50,13 @@ namespace TP_OH_6_15_2020_Prototype
             welcomeTextView.Text = $"Welcome to TP, {nameResponse.username}!";
 
             viewEventBtn.Click += ViewEventBtn_Click;
+            takeQuizesBtn.Click += TakeQuizesBtn_Click;
+        }
+
+        private void TakeQuizesBtn_Click(object sender, EventArgs e)
+        {
+            var intent = new Intent(this, typeof(QuizListActivity));
+            StartActivity(intent);
         }
 
         private void ViewEventBtn_Click(object sender, EventArgs e)

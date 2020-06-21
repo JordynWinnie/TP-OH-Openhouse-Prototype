@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -39,7 +39,11 @@ namespace TP_OH_6_15_2020_Prototype
             offeredByTextView = FindViewById<TextView>(Resource.Id.offeredByTextViewDetailed);
             informationEditText = FindViewById<EditText>(Resource.Id.eventInformationEditTextDetailed);
             joinEventButton = FindViewById<Button>(Resource.Id.joinEventButtonDetailed);
+            await GetEventDetails();
+        }
 
+        private async Task GetEventDetails()
+        {
             var eventId = Intent.GetIntExtra("eventid", -1);
             var detailsRequest = await WebRequest.HttpClient.GetAsync($"http://10.0.2.2:54888/EventsTables/GetEvents?id={eventId}");
 
@@ -47,6 +51,9 @@ namespace TP_OH_6_15_2020_Prototype
 
             eventNameTextView.Text = detailsResponse.eventName;
             offeredByTextView.Text = "Offered by: " + detailsResponse.courseName;
+
+            //Building the event Description along with Timings:
+
             StringBuilder sb = new StringBuilder();
             sb.Append(detailsResponse.eventDescription);
             sb.AppendLine("\n");

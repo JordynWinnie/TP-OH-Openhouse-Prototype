@@ -26,6 +26,7 @@
         android:layout_height="100dp"/>
 
     <TextView
+        android:id="@+id/leadingMessageTextView"
         android:textStyle="italic"
         android:paddingTop="4dp"
         android:text="Click To know more"

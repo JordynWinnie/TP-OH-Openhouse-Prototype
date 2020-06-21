@@ -74,7 +74,10 @@
     <Compile Include="Models\CourseModel.cs" />
     <Compile Include="Models\EventModel.cs" />
     <Compile Include="Models\EventTimingModel.cs" />
+    <Compile Include="Models\QuizListModel.cs" />
     <Compile Include="Models\UserModel.cs" />
+    <Compile Include="QuizListActivity.cs" />
+    <Compile Include="QuizListAdapter.cs" />
     <Compile Include="RegisterActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -148,6 +151,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\event_detailed_view_layout.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\quiz_main_layout.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
