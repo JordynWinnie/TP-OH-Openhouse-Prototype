@@ -25,6 +25,8 @@ namespace TP_OH_6_15_2020_Prototype
         private Button scanQRCodeBtn;
         private UserModel nameResponse;
 
+        public static int UserId;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -43,6 +45,7 @@ namespace TP_OH_6_15_2020_Prototype
             findOutAboutIITBtn = FindViewById<Button>(Resource.Id.findOutAboutIITBtn);
             scanQRCodeBtn = FindViewById<Button>(Resource.Id.scanQRCodeBtn);
             var userid = Intent.GetIntExtra("userid", -1);
+            UserId = userid;
             var nameRequest = await WebRequest.HttpClient.GetAsync($"http://10.0.2.2:54888/Users/GetUserInfo?userid={userid}");
 
             nameResponse = JsonConvert.DeserializeObject<UserModel>(await nameRequest.Content.ReadAsStringAsync());

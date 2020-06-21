@@ -44,6 +44,8 @@ namespace TP_OH_6_15_2020_Prototype
         { StartPage, QuizPage, AnswerPage, ResultPage, RewardClaimable };
 
         private QuizState quizState { get; set; }
+        public int UserID { get; private set; }
+        public int QuizID { get; private set; }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -56,6 +58,9 @@ namespace TP_OH_6_15_2020_Prototype
 
         private void InitViews()
         {
+            UserID = MainMenuActivity.UserId;
+            QuizID = Intent.GetIntExtra("quizId", -1);
+
             //To save time, the QuizSession handles the Question, Answer and Results page all in one Activity:
 
             mainHeaderNameTextView = FindViewById<TextView>(Resource.Id.quizNameSession);
@@ -112,11 +117,37 @@ namespace TP_OH_6_15_2020_Prototype
                     break;
 
                 case QuizState.RewardClaimable:
-
+                    AttemptClaimReward();
                     break;
 
                 default:
                     break;
+            }
+        }
+
+        private async void AttemptClaimReward()
+        {
+            bottomButton.Text = "Claiming Reward...";
+            bottomButton.Enabled = false;
+
+            var rewardClaimRequest = await WebRequest.HttpClient.GetAsync($"http://10.0.2.2:54888/QuizTables/ClaimCredits?userID={UserID}&quizID={QuizID}");
+
+            if (rewardClaimRequest.StatusCode == System.Net.HttpStatusCode.Forbidden)
+            {
+                Toast.MakeText(this, "Reward already claimed. :(", ToastLength.Short).Show();
+                bottomButton.Text = "Reward Claimed already";
+            }
+            else if (rewardClaimRequest.StatusCode == System.Net.HttpStatusCode.InternalServerError)
+            {
+                Toast.MakeText(this, "Server not responding", ToastLength.Short).Show();
+                bottomButton.Text = "Attempt to claim again";
+                bottomButton.Enabled = true;
+            }
+            else
+            {
+                Toast.MakeText(this, "Reward claimed!", ToastLength.Short).Show();
+                bottomButton.Text =
+                    "Reward Successfully claimed";
             }
         }
 
@@ -129,7 +160,7 @@ namespace TP_OH_6_15_2020_Prototype
             sb.AppendLine($"Your result was: {numberOfCorrectAnswers}/{questionList.Count}");
 
             subHeaderTextView.Text = sb.ToString();
-            miscInfoTextView.Text = "Getting full marks allows you to claim a " + quizInfo.quizCredits + "credit reward!";
+            miscInfoTextView.Text = "Getting full marks allows you to claim a " + quizInfo.quizCredits + " credit reward!";
             if (numberOfCorrectAnswers == questionList.Count)
             {
                 quizState = QuizState.RewardClaimable;
@@ -143,7 +174,7 @@ namespace TP_OH_6_15_2020_Prototype
             var content = new StringContent("", Encoding.UTF8, "application/json");
 
             var postResult = await WebRequest.HttpClient
-                .PostAsync($"http://10.0.2.2:54888/QuizTables/PostResult?quizID={quizInfo.quizID}&userID=1&score={numberOfCorrectAnswers}", content);
+                .PostAsync($"http://10.0.2.2:54888/QuizTables/PostResult?quizID={quizInfo.quizID}&userID={UserID}&score={numberOfCorrectAnswers}", content);
 
             if (!postResult.IsSuccessStatusCode)
             {
@@ -269,7 +300,7 @@ namespace TP_OH_6_15_2020_Prototype
 
         private async void LoadLeaderBoardInformation()
         {
-            var leaderBoardRequest = await WebRequest.HttpClient.GetAsync("http://10.0.2.2:54888/QuizTables/ReturnLeaderBoardForQuiz?quizID=1");
+            var leaderBoardRequest = await WebRequest.HttpClient.GetAsync($"http://10.0.2.2:54888/QuizTables/ReturnLeaderBoardForQuiz?quizID={QuizID}");
             leaderBoardInfo = JsonConvert.DeserializeObject<List<MiscellaneousRequests.LeaderBoard>>(await leaderBoardRequest.Content.ReadAsStringAsync());
             var leaderBoardString = new List<string>();
 
@@ -291,7 +322,7 @@ namespace TP_OH_6_15_2020_Prototype
         private async void LoadQuizInformation()
         {
             //TODO: implement ID shift:
-            var quizInfoRequest = await WebRequest.HttpClient.GetAsync("http://10.0.2.2:54888/QuizTables/GetQuizList?quizID=1");
+            var quizInfoRequest = await WebRequest.HttpClient.GetAsync($"http://10.0.2.2:54888/QuizTables/GetQuizList?quizID={QuizID}");
             quizInfo = JsonConvert.DeserializeObject<QuizListModel>(await quizInfoRequest.Content.ReadAsStringAsync());
             mainHeaderNameTextView.Text = quizInfo.quizName;
 
@@ -309,8 +340,8 @@ namespace TP_OH_6_15_2020_Prototype
             bottomButton.Text = "Downloading Questions...";
             bottomButton.Enabled = false;
 
-            var questionDownloadRequest = await WebRequest.HttpClient.GetAsync("http://10.0.2.2:54888/QuizTables/GetQuizQuestions?quizID=1");
-            var answerDownloadRequest = await WebRequest.HttpClient.GetAsync("http://10.0.2.2:54888/QuizTables/GetQuizAnswers?quizID=1");
+            var questionDownloadRequest = await WebRequest.HttpClient.GetAsync($"http://10.0.2.2:54888/QuizTables/GetQuizQuestions?quizID={QuizID}");
+            var answerDownloadRequest = await WebRequest.HttpClient.GetAsync($"http://10.0.2.2:54888/QuizTables/GetQuizAnswers?quizID={QuizID}");
             questionList = JsonConvert.DeserializeObject<List<MiscellaneousRequests.Question>>(await questionDownloadRequest.Content.ReadAsStringAsync());
             answerList = JsonConvert.DeserializeObject<List<MiscellaneousRequests.Answer>>(await answerDownloadRequest.Content.ReadAsStringAsync());
 

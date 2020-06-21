@@ -38,6 +38,15 @@ namespace TP_OH_6_15_2020_Prototype
             quizList = JsonConvert.DeserializeObject<List<QuizListModel>>(await quizRequest.Content.ReadAsStringAsync());
 
             quizListView.Adapter = new QuizListAdapter(quizList, this);
+
+            quizListView.ItemClick += QuizListView_ItemClick; ;
+        }
+
+        private void QuizListView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        {
+            var intent = new Intent(this, typeof(QuizSessionActivity));
+            intent.PutExtra("quizId", quizList[e.Position].quizID);
+            StartActivity(intent);
         }
     }
 }
