@@ -12,13 +12,13 @@ namespace TP_OH_IIT_2020_API
     using System;
     using System.Collections.Generic;
     
-    public partial class AnswersTable
+    public partial class QuizEarnedCredit
     {
-        public int answerID { get; set; }
-        public string answerString { get; set; }
-        public int questionID { get; set; }
-        public bool isCorrectAnswer { get; set; }
+        public int quizEarnedCreditsId { get; set; }
+        public int quizIDFK { get; set; }
+        public int userIDFK { get; set; }
     
-        public virtual QuestionsTable QuestionsTable { get; set; }
+        public virtual QuizTable QuizTable { get; set; }
+        public virtual User User { get; set; }
     }
 }

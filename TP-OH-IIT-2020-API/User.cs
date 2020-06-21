@@ -20,6 +20,7 @@ namespace TP_OH_IIT_2020_API
             this.AwardRedemptions = new HashSet<AwardRedemption>();
             this.EarnedCreditsFromEventTables = new HashSet<EarnedCreditsFromEventTable>();
             this.QuizAttempts = new HashSet<QuizAttempt>();
+            this.QuizEarnedCredits = new HashSet<QuizEarnedCredit>();
         }
     
         public int userid { get; set; }
@@ -35,5 +36,7 @@ namespace TP_OH_IIT_2020_API
         public virtual ICollection<EarnedCreditsFromEventTable> EarnedCreditsFromEventTables { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<QuizAttempt> QuizAttempts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<QuizEarnedCredit> QuizEarnedCredits { get; set; }
     }
 }

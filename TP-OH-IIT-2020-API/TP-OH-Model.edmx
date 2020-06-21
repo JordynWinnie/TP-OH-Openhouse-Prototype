@@ -13,7 +13,6 @@
           <Property Name="answerString" Type="varchar(max)" Nullable="false" />
           <Property Name="questionID" Type="int" Nullable="false" />
           <Property Name="isCorrectAnswer" Type="bit" Nullable="false" />
-          <Property Name="answerTrivia" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="AwardRedemption">
           <Key>
@@ -87,6 +86,7 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
           <Property Name="quizIDFK" Type="int" Nullable="false" />
           <Property Name="questionString" Type="varchar(max)" Nullable="false" />
           <Property Name="questionHint" Type="varchar(max)" />
+          <Property Name="questionTrivia" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="QuizAttempts">
           <Key>
@@ -96,6 +96,14 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
           <Property Name="attemptID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="score" Type="int" Nullable="false" />
           <Property Name="quizIDFK" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QuizEarnedCredits">
+          <Key>
+            <PropertyRef Name="quizEarnedCreditsId" />
+          </Key>
+          <Property Name="quizEarnedCreditsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="quizIDFK" Type="int" Nullable="false" />
+          <Property Name="userIDFK" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="QuizTable">
           <Key>
@@ -247,6 +255,30 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_QuizEarnedCredits_QuizTable">
+          <End Role="QuizTable" Type="Self.QuizTable" Multiplicity="1" />
+          <End Role="QuizEarnedCredits" Type="Self.QuizEarnedCredits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuizTable">
+              <PropertyRef Name="quizID" />
+            </Principal>
+            <Dependent Role="QuizEarnedCredits">
+              <PropertyRef Name="quizIDFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuizEarnedCredits_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="QuizEarnedCredits" Type="Self.QuizEarnedCredits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userid" />
+            </Principal>
+            <Dependent Role="QuizEarnedCredits">
+              <PropertyRef Name="userIDFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -288,6 +320,7 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
           <EntitySet Name="EventTimings" EntityType="Self.EventTimings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QuestionsTable" EntityType="Self.QuestionsTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QuizAttempts" EntityType="Self.QuizAttempts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuizEarnedCredits" EntityType="Self.QuizEarnedCredits" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QuizTable" EntityType="Self.QuizTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
@@ -336,6 +369,14 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
             <End Role="User" EntitySet="User" />
             <End Role="QuizAttempts" EntitySet="QuizAttempts" />
           </AssociationSet>
+          <AssociationSet Name="FK_QuizEarnedCredits_QuizTable" Association="Self.FK_QuizEarnedCredits_QuizTable">
+            <End Role="QuizTable" EntitySet="QuizTable" />
+            <End Role="QuizEarnedCredits" EntitySet="QuizEarnedCredits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuizEarnedCredits_User" Association="Self.FK_QuizEarnedCredits_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="QuizEarnedCredits" EntitySet="QuizEarnedCredits" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -350,7 +391,6 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
           <Property Name="questionID" Type="Int32" Nullable="false" />
           <Property Name="isCorrectAnswer" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="QuestionsTable" Relationship="Self.FK_AnswersTable_QuestionsTable" FromRole="AnswersTable" ToRole="QuestionsTable" />
-          <Property Name="answerTrivia" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="AwardRedemption">
           <Key>
@@ -418,6 +458,7 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
           <Property Name="questionHint" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="AnswersTables" Relationship="Self.FK_AnswersTable_QuestionsTable" FromRole="QuestionsTable" ToRole="AnswersTable" />
           <NavigationProperty Name="QuizTable" Relationship="Self.FK_QuestionsTable_QuizTable" FromRole="QuestionsTable" ToRole="QuizTable" />
+          <Property Name="questionTrivia" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="QuizAttempt">
           <Key>
@@ -440,6 +481,7 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
           <NavigationProperty Name="QuestionsTables" Relationship="Self.FK_QuestionsTable_QuizTable" FromRole="QuizTable" ToRole="QuestionsTable" />
           <NavigationProperty Name="QuizAttempts" Relationship="Self.FK_QuizAttempts_QuizTable" FromRole="QuizTable" ToRole="QuizAttempts" />
           <Property Name="quizCredits" Type="Int32" />
+          <NavigationProperty Name="QuizEarnedCredits" Relationship="TPOHModel.FK_QuizEarnedCredits_QuizTable" FromRole="QuizTable" ToRole="QuizEarnedCredit" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -464,6 +506,7 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
           <NavigationProperty Name="AwardRedemptions" Relationship="Self.FK_AwardRedemption_User" FromRole="User" ToRole="AwardRedemption" />
           <NavigationProperty Name="EarnedCreditsFromEventTables" Relationship="Self.FK_EarnedCreditsFromEventTable_User" FromRole="User" ToRole="EarnedCreditsFromEventTable" />
           <NavigationProperty Name="QuizAttempts" Relationship="Self.FK_QuizAttempts_User" FromRole="User" ToRole="QuizAttempts" />
+          <NavigationProperty Name="QuizEarnedCredits" Relationship="TPOHModel.FK_QuizEarnedCredits_User" FromRole="User" ToRole="QuizEarnedCredit" />
         </EntityType>
         <Association Name="FK_AnswersTable_QuestionsTable">
           <End Role="QuestionsTable" Type="Self.QuestionsTable" Multiplicity="1" />
@@ -657,6 +700,15 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
             <End Role="CourseTable" EntitySet="CourseTables" />
             <End Role="EventsTable" EntitySet="EventsTables" />
           </AssociationSet>
+          <EntitySet Name="QuizEarnedCredits" EntityType="TPOHModel.QuizEarnedCredit" />
+          <AssociationSet Name="FK_QuizEarnedCredits_QuizTable" Association="TPOHModel.FK_QuizEarnedCredits_QuizTable">
+            <End Role="QuizTable" EntitySet="QuizTables" />
+            <End Role="QuizEarnedCredit" EntitySet="QuizEarnedCredits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuizEarnedCredits_User" Association="TPOHModel.FK_QuizEarnedCredits_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="QuizEarnedCredit" EntitySet="QuizEarnedCredits" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -697,6 +749,40 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="QuizEarnedCredit">
+          <Key>
+            <PropertyRef Name="quizEarnedCreditsId" />
+          </Key>
+          <Property Name="quizEarnedCreditsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="quizIDFK" Type="Int32" Nullable="false" />
+          <Property Name="userIDFK" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="QuizTable" Relationship="TPOHModel.FK_QuizEarnedCredits_QuizTable" FromRole="QuizEarnedCredit" ToRole="QuizTable" />
+          <NavigationProperty Name="User" Relationship="TPOHModel.FK_QuizEarnedCredits_User" FromRole="QuizEarnedCredit" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_QuizEarnedCredits_QuizTable">
+          <End Type="TPOHModel.QuizTable" Role="QuizTable" Multiplicity="1" />
+          <End Type="TPOHModel.QuizEarnedCredit" Role="QuizEarnedCredit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuizTable">
+              <PropertyRef Name="quizID" />
+            </Principal>
+            <Dependent Role="QuizEarnedCredit">
+              <PropertyRef Name="quizIDFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuizEarnedCredits_User">
+          <End Type="TPOHModel.User" Role="User" Multiplicity="1" />
+          <End Type="TPOHModel.QuizEarnedCredit" Role="QuizEarnedCredit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userid" />
+            </Principal>
+            <Dependent Role="QuizEarnedCredit">
+              <PropertyRef Name="userIDFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -706,7 +792,6 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
           <EntitySetMapping Name="AnswersTables">
             <EntityTypeMapping TypeName="TPOHModel.AnswersTable">
               <MappingFragment StoreEntitySet="AnswersTable">
-                <ScalarProperty Name="answerTrivia" ColumnName="answerTrivia" />
                 <ScalarProperty Name="answerID" ColumnName="answerID" />
                 <ScalarProperty Name="answerString" ColumnName="answerString" />
                 <ScalarProperty Name="questionID" ColumnName="questionID" />
@@ -769,6 +854,7 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
           <EntitySetMapping Name="QuestionsTables">
             <EntityTypeMapping TypeName="TPOHModel.QuestionsTable">
               <MappingFragment StoreEntitySet="QuestionsTable">
+                <ScalarProperty Name="questionTrivia" ColumnName="questionTrivia" />
                 <ScalarProperty Name="questionID" ColumnName="questionID" />
                 <ScalarProperty Name="quizIDFK" ColumnName="quizIDFK" />
                 <ScalarProperty Name="questionString" ColumnName="questionString" />
@@ -857,6 +943,15 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
                 <ScalarProperty Name="courseShortName" ColumnName="courseShortName" />
                 <ScalarProperty Name="courseName" ColumnName="courseName" />
                 <ScalarProperty Name="courseID" ColumnName="courseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuizEarnedCredits">
+            <EntityTypeMapping TypeName="TPOHModel.QuizEarnedCredit">
+              <MappingFragment StoreEntitySet="QuizEarnedCredits">
+                <ScalarProperty Name="userIDFK" ColumnName="userIDFK" />
+                <ScalarProperty Name="quizIDFK" ColumnName="quizIDFK" />
+                <ScalarProperty Name="quizEarnedCreditsId" ColumnName="quizEarnedCreditsId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -208,6 +208,9 @@
     <Compile Include="QuizAttempt.cs">
       <DependentUpon>TP-OH-Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="QuizEarnedCredit.cs">
+      <DependentUpon>TP-OH-Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="QuizTable.cs">
       <DependentUpon>TP-OH-Model.tt</DependentUpon>
     </Compile>

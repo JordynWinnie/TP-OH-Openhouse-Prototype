@@ -19,6 +19,7 @@ namespace TP_OH_IIT_2020_API
         {
             this.QuestionsTables = new HashSet<QuestionsTable>();
             this.QuizAttempts = new HashSet<QuizAttempt>();
+            this.QuizEarnedCredits = new HashSet<QuizEarnedCredit>();
         }
     
         public int quizID { get; set; }
@@ -30,5 +31,7 @@ namespace TP_OH_IIT_2020_API
         public virtual ICollection<QuestionsTable> QuestionsTables { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<QuizAttempt> QuizAttempts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<QuizEarnedCredit> QuizEarnedCredits { get; set; }
     }
 }

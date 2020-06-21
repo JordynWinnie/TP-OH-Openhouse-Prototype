@@ -7,6 +7,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Http.Results;
 using System.Web.Mvc;
 using TP_OH_IIT_2020_API;
 
@@ -19,6 +20,70 @@ namespace TP_OH_IIT_2020_API.Controllers
         public QuizTablesController()
         {
             db.Configuration.LazyLoadingEnabled = false;
+        }
+
+        public ActionResult ClaimCredits(int userID, int quizID)
+        {
+            var quiz = (from x in db.QuizTables
+                        where x.quizID == quizID
+                        select x).First();
+
+            var user = (from x in db.Users
+                        where x.userid == userID
+                        select x).First();
+
+            var checkIfUsed = (from x in db.QuizEarnedCredits
+                               where x.userIDFK == userID && x.quizIDFK == quizID
+                               select x).Any();
+
+            if (checkIfUsed)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
+
+            try
+            {
+                var creditClaim = new QuizEarnedCredit
+                {
+                    quizIDFK = quizID,
+                    userIDFK = userID
+                };
+                db.QuizEarnedCredits.Add(creditClaim);
+                user.credits += (int)quiz.quizCredits;
+
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return Json(ex);
+                throw;
+            }
+
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
+        }
+
+        [HttpPost]
+        public ActionResult PostResult(int quizID, int userID, int score)
+        {
+            var quizAttempt = new QuizAttempt
+
+            {
+                quizIDFK = quizID,
+                score = score,
+                useridFK = userID
+            };
+
+            db.QuizAttempts.Add(quizAttempt);
+
+            try
+            {
+                db.SaveChanges();
+                return Json(quizAttempt);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex);
+            }
         }
 
         public ActionResult ReturnLeaderBoardForQuiz(int quizID)
@@ -75,6 +140,7 @@ namespace TP_OH_IIT_2020_API.Controllers
                            x.questionID,
                            x.questionString,
                            x.questionHint,
+                           x.questionTrivia
                        };
 
             return Json(quiz, JsonRequestBehavior.AllowGet);

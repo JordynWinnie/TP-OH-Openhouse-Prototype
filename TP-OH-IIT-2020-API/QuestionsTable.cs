@@ -24,6 +24,7 @@ namespace TP_OH_IIT_2020_API
         public int quizIDFK { get; set; }
         public string questionString { get; set; }
         public string questionHint { get; set; }
+        public string questionTrivia { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AnswersTable> AnswersTables { get; set; }

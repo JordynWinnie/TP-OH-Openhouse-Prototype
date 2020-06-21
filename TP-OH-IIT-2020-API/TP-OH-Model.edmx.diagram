@@ -28,6 +28,9 @@
         <EntityTypeShape EntityType="TPOHModel.mainEventTiming" Width="1.5" PointX="5.375" PointY="4.75" />
         <EntityTypeShape EntityType="TPOHModel.CourseTable" Width="1.5" PointX="0.75" PointY="15.125" />
         <AssociationConnector Association="TPOHModel.FK_EventsTable_CourseTable" />
+        <EntityTypeShape EntityType="TPOHModel.QuizEarnedCredit" Width="1.5" PointX="6" PointY="8.5" />
+        <AssociationConnector Association="TPOHModel.FK_QuizEarnedCredits_QuizTable" />
+        <AssociationConnector Association="TPOHModel.FK_QuizEarnedCredits_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
