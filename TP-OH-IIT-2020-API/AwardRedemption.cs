@@ -17,6 +17,7 @@ namespace TP_OH_IIT_2020_API
         public int redemptionID { get; set; }
         public int useridFK { get; set; }
         public int awardIdFK { get; set; }
+        public bool isAwardUsed { get; set; }
     
         public virtual AwardsTable AwardsTable { get; set; }
         public virtual User User { get; set; }

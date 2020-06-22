@@ -19,19 +19,93 @@ namespace TP_OH_IIT_2020_API.Controllers
             db.Configuration.LazyLoadingEnabled = false;
         }
 
-        public ActionResult GetListOfAwards()
+        public ActionResult RedeemAward(int awardID, int userID)
         {
-            var awards = from x in db.AwardsTables
-                         select new
-                         {
-                             x.awardName,
-                             x.awardDescription,
-                             Limit = x.awardLimit - x.AwardRedemptions.Where(y => y.awardIdFK == x.awardID).Count(),
-                             x.awardID,
-                             x.creditsRequired
-                         };
+            var user = (from x in db.Users
+                        where x.userid == userID
+                        select x).First();
 
-            return Json(awards, JsonRequestBehavior.AllowGet);
+            var award = (from x in db.AwardsTables
+                         where x.awardID == awardID
+                         select x).First();
+
+            var redemptionCount = (from x in db.AwardRedemptions
+                                   where x.awardIdFK == awardID
+                                   select x).Count();
+
+            var checkForRedemption = (from x in db.AwardRedemptions
+                                      where x.awardIdFK == awardID && x.useridFK == userID
+                                      select x).Any();
+
+            if ((award.awardLimit - redemptionCount) <= 0)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+
+            if (checkForRedemption)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
+
+            if (user.credits < award.creditsRequired)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotAcceptable);
+            }
+
+            var insertAwardRedemption = new AwardRedemption
+            {
+                awardIdFK = awardID,
+                useridFK = userID,
+                isAwardUsed = false
+            };
+
+            db.AwardRedemptions.Add(insertAwardRedemption);
+            user.credits -= award.creditsRequired;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return Json(ex, JsonRequestBehavior.AllowGet);
+                throw;
+            }
+
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
+        }
+
+        public ActionResult GetAward(int? awardID)
+        {
+            if (awardID != null)
+            {
+                var awards = from x in db.AwardsTables
+                             where x.awardID == awardID
+                             select new
+                             {
+                                 x.awardName,
+                                 x.awardDescription,
+                                 Limit = x.awardLimit - x.AwardRedemptions.Where(y => y.awardIdFK == x.awardID).Count(),
+                                 x.awardID,
+                                 x.creditsRequired
+                             };
+
+                return Json(awards.First(), JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var awards = from x in db.AwardsTables
+                             select new
+                             {
+                                 x.awardName,
+                                 x.awardDescription,
+                                 Limit = x.awardLimit - x.AwardRedemptions.Where(y => y.awardIdFK == x.awardID).Count(),
+                                 x.awardID,
+                                 x.creditsRequired
+                             };
+
+                return Json(awards, JsonRequestBehavior.AllowGet);
+            }
         }
 
         // GET: AwardsTables

@@ -21,6 +21,7 @@
           <Property Name="redemptionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="useridFK" Type="int" Nullable="false" />
           <Property Name="awardIdFK" Type="int" Nullable="false" />
+          <Property Name="isAwardUsed" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="AwardsTable">
           <Key>
@@ -401,6 +402,7 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
           <Property Name="awardIdFK" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AwardsTable" Relationship="Self.FK_AwardRedemption_AwardsTable1" FromRole="AwardRedemption" ToRole="AwardsTable" />
           <NavigationProperty Name="User" Relationship="Self.FK_AwardRedemption_User" FromRole="AwardRedemption" ToRole="User" />
+          <Property Name="isAwardUsed" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="AwardsTable">
           <Key>
@@ -802,6 +804,7 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
           <EntitySetMapping Name="AwardRedemptions">
             <EntityTypeMapping TypeName="TPOHModel.AwardRedemption">
               <MappingFragment StoreEntitySet="AwardRedemption">
+                <ScalarProperty Name="isAwardUsed" ColumnName="isAwardUsed" />
                 <ScalarProperty Name="redemptionID" ColumnName="redemptionID" />
                 <ScalarProperty Name="useridFK" ColumnName="useridFK" />
                 <ScalarProperty Name="awardIdFK" ColumnName="awardIdFK" />
