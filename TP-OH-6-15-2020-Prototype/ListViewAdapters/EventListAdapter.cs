@@ -6,7 +6,7 @@ using TP_OH_6_15_2020_Prototype.Models;
 
 namespace TP_OH_6_15_2020_Prototype
 {
-    public class EventListAdapter : BaseAdapter<EventModel>
+    internal class EventListAdapter : BaseAdapter<EventModel>
     {
         private List<EventModel> mItems;
         private Context mContext;

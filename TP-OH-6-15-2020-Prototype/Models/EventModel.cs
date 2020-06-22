@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace TP_OH_6_15_2020_Prototype.Models
 {
-    public class EventModel
+    internal class EventModel
     {
         public int eventID { get; set; }
         public string eventName { get; set; }

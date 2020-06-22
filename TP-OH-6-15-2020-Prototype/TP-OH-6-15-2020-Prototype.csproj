@@ -66,19 +66,22 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AwardListActivity.cs" />
+    <Compile Include="ListViewAdapters\AwardListAdapter.cs" />
     <Compile Include="DetailedEventViewActivity.cs" />
     <Compile Include="EventListActivity.cs" />
-    <Compile Include="EventListAdapter.cs" />
+    <Compile Include="ListViewAdapters\EventListAdapter.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MainMenuActivity.cs" />
+    <Compile Include="Models\AwardListModel.cs" />
     <Compile Include="Models\CourseModel.cs" />
     <Compile Include="Models\EventModel.cs" />
     <Compile Include="Models\EventTimingModel.cs" />
-    <Compile Include="Models\MiscellaneousRequests.cs" />
+    <Compile Include="Models\QuizSessionModels.cs" />
     <Compile Include="Models\QuizListModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="QuizListActivity.cs" />
-    <Compile Include="QuizListAdapter.cs" />
+    <Compile Include="ListViewAdapters\QuizListAdapter.cs" />
     <Compile Include="QuizSessionActivity.cs" />
     <Compile Include="RegisterActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
@@ -169,6 +172,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\quiz_session_layout.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\award_redemption_layout.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

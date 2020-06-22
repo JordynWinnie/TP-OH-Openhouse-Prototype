@@ -31,14 +31,14 @@ namespace TP_OH_6_15_2020_Prototype
         private TextView miscInfoTextView;
         private Button bottomButton;
         private QuizListModel quizInfo;
-        private List<MiscellaneousRequests.LeaderBoard> leaderBoardInfo;
-        private List<MiscellaneousRequests.Question> questionList;
-        private List<MiscellaneousRequests.Answer> answerList;
-        private MiscellaneousRequests.Answer correctAnswer;
+        private List<QuizSessionModels.LeaderBoard> leaderBoardInfo;
+        private List<QuizSessionModels.Question> questionList;
+        private List<QuizSessionModels.Answer> answerList;
+        private QuizSessionModels.Answer correctAnswer;
 
         private int numberOfCorrectAnswers = 0;
         private int currentQuestionNumber = 0;
-        private MiscellaneousRequests.Question currentQuestion;
+        private QuizSessionModels.Question currentQuestion;
 
         private enum QuizState
         { StartPage, QuizPage, AnswerPage, ResultPage, RewardClaimable };
@@ -301,7 +301,7 @@ namespace TP_OH_6_15_2020_Prototype
         private async void LoadLeaderBoardInformation()
         {
             var leaderBoardRequest = await WebRequest.HttpClient.GetAsync($"http://10.0.2.2:54888/QuizTables/ReturnLeaderBoardForQuiz?quizID={QuizID}");
-            leaderBoardInfo = JsonConvert.DeserializeObject<List<MiscellaneousRequests.LeaderBoard>>(await leaderBoardRequest.Content.ReadAsStringAsync());
+            leaderBoardInfo = JsonConvert.DeserializeObject<List<QuizSessionModels.LeaderBoard>>(await leaderBoardRequest.Content.ReadAsStringAsync());
             var leaderBoardString = new List<string>();
 
             if (leaderBoardInfo.Count == 0)
@@ -342,8 +342,8 @@ namespace TP_OH_6_15_2020_Prototype
 
             var questionDownloadRequest = await WebRequest.HttpClient.GetAsync($"http://10.0.2.2:54888/QuizTables/GetQuizQuestions?quizID={QuizID}");
             var answerDownloadRequest = await WebRequest.HttpClient.GetAsync($"http://10.0.2.2:54888/QuizTables/GetQuizAnswers?quizID={QuizID}");
-            questionList = JsonConvert.DeserializeObject<List<MiscellaneousRequests.Question>>(await questionDownloadRequest.Content.ReadAsStringAsync());
-            answerList = JsonConvert.DeserializeObject<List<MiscellaneousRequests.Answer>>(await answerDownloadRequest.Content.ReadAsStringAsync());
+            questionList = JsonConvert.DeserializeObject<List<QuizSessionModels.Question>>(await questionDownloadRequest.Content.ReadAsStringAsync());
+            answerList = JsonConvert.DeserializeObject<List<QuizSessionModels.Answer>>(await answerDownloadRequest.Content.ReadAsStringAsync());
 
             bottomButton.Text = "Take Quiz";
             bottomButton.Enabled = true;

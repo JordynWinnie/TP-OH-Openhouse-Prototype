@@ -56,6 +56,13 @@ namespace TP_OH_6_15_2020_Prototype
             viewEventBtn.Click += ViewEventBtn_Click;
             takeQuizesBtn.Click += TakeQuizesBtn_Click;
             scanQRCodeBtn.Click += ScanQRCodeBtn_Click;
+            redeemAwardsBtn.Click += RedeemAwardsBtn_Click;
+        }
+
+        private void RedeemAwardsBtn_Click(object sender, EventArgs e)
+        {
+            var intent = new Intent(this, typeof(AwardListActivity));
+            StartActivity(intent);
         }
 
         private async void ScanQRCodeBtn_Click(object sender, EventArgs e)

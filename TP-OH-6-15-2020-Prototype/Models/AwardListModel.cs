@@ -12,11 +12,12 @@ using Android.Widget;
 
 namespace TP_OH_6_15_2020_Prototype.Models
 {
-    internal class EventTimingModel
+    internal class AwardListModel
     {
-        public int eventTimingID { get; set; }
-        public int eventIDFK { get; set; }
-        public DateTime startTimeOfEvent { get; set; }
-        public DateTime endTimeOfEvent { get; set; }
+        public string awardName { get; set; }
+        public string awardDescription { get; set; }
+        public int Limit { get; set; }
+        public int awardID { get; set; }
+        public int creditsRequired { get; set; }
     }
 }
