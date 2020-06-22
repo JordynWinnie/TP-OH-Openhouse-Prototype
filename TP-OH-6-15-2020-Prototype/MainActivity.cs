@@ -8,6 +8,7 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using TP_OH_6_15_2020_Prototype.Models;
 using Android.Content;
+using ZXing.Mobile;
 
 namespace TP_OH_6_15_2020_Prototype
 {
@@ -51,10 +52,18 @@ namespace TP_OH_6_15_2020_Prototype
             shortCutButton.Click += ShortCutButton_Click;
         }
 
-        private void ShortCutButton_Click(object sender, EventArgs e)
+        private async void ShortCutButton_Click(object sender, EventArgs e)
         {
-            var intent = new Intent(this, typeof(QuizSessionActivity));
-            StartActivity(intent);
+            MobileBarcodeScanner.Initialize(Application);
+            var scanner = new ZXing.Mobile.MobileBarcodeScanner();
+
+            var result = await scanner.Scan();
+
+            if (result != null)
+            {
+                Console.WriteLine("Scanned Barcode: " + result.Text);
+                Toast.MakeText(this, result.Text, ToastLength.Short).Show();
+            }
         }
 
         private void RegisterBtn_Click(object sender, EventArgs e)

@@ -11,6 +11,7 @@ using Android.Views;
 using Android.Widget;
 using Newtonsoft.Json;
 using TP_OH_6_15_2020_Prototype.Models;
+using ZXing.Mobile;
 
 namespace TP_OH_6_15_2020_Prototype
 {
@@ -54,6 +55,38 @@ namespace TP_OH_6_15_2020_Prototype
 
             viewEventBtn.Click += ViewEventBtn_Click;
             takeQuizesBtn.Click += TakeQuizesBtn_Click;
+            scanQRCodeBtn.Click += ScanQRCodeBtn_Click;
+        }
+
+        private async void ScanQRCodeBtn_Click(object sender, EventArgs e)
+        {
+            MobileBarcodeScanner.Initialize(Application);
+            var scanner = new MobileBarcodeScanner();
+
+            var result = await scanner.Scan();
+
+            if (result != null)
+            {
+                Console.WriteLine("Scanned Barcode: " + result.Text);
+                var rewardClaimRequest = await WebRequest
+                    .HttpClient.GetAsync($"http://10.0.2.2:54888/EventsTables/ClaimRewardFromEvent?userId={UserId}&rewardCode={result.Text}");
+                if (rewardClaimRequest.StatusCode == System.Net.HttpStatusCode.Forbidden)
+                {
+                    Toast.MakeText(this, "Sorry, you have already claimed this award", ToastLength.Short).Show();
+                }
+                else if (rewardClaimRequest.StatusCode == System.Net.HttpStatusCode.NotFound)
+                {
+                    Toast.MakeText(this, "Sorry, this is an invalid code", ToastLength.Short).Show();
+                }
+                else if (rewardClaimRequest.StatusCode == System.Net.HttpStatusCode.InternalServerError)
+                {
+                    Toast.MakeText(this, "An error occurred, please try again", ToastLength.Short).Show();
+                }
+                else
+                {
+                    Toast.MakeText(this, "Reward claimed, thank you for participating!", ToastLength.Short).Show();
+                }
+            }
         }
 
         private void TakeQuizesBtn_Click(object sender, EventArgs e)
