@@ -15,6 +15,51 @@ namespace TP_OH_IIT_2020_API.Controllers
             db.Configuration.LazyLoadingEnabled = false;
         }
 
+        public ActionResult ClaimRewardFromEvent(int userId, string rewardCode)
+        {
+            var fromEvent = (from x in db.EventsTables
+                             where x.qrCodeString == rewardCode
+                             select x).FirstOrDefault();
+
+            var user = (from x in db.Users
+                        where x.userid == userId
+                        select x).First();
+
+            if (fromEvent == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+            }
+
+            var checkForRedemption = (from x in db.EarnedCreditsFromEventTables
+                                      where x.userIDFK == userId && x.eventIDFK == fromEvent.eventID
+                                      select x).Any();
+
+            if (checkForRedemption)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
+
+            var insertEventRewardClaim = new EarnedCreditsFromEventTable
+            {
+                eventIDFK = fromEvent.eventID,
+                userIDFK = userId
+            };
+
+            user.credits += fromEvent.creditsToEarn;
+
+            db.EarnedCreditsFromEventTables.Add(insertEventRewardClaim);
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (System.Exception ex)
+            {
+                return Json(ex, JsonRequestBehavior.AllowGet);
+                throw;
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
+        }
+
         public ActionResult GetEvents(int? id)
         {
             if (id != null)
