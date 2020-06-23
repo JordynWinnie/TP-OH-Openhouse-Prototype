@@ -17,5 +17,6 @@ namespace TP_OH_6_15_2020_Prototype.Models
         public int awardIdFK { get; set; }
         public bool isAwardUsed { get; set; }
         public string awardName { get; set; }
+        public Guid UUID { get; set; }
     }
 }

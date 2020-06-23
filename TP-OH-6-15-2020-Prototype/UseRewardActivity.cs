@@ -54,12 +54,15 @@ namespace TP_OH_6_15_2020_Prototype
                 }
             }
 
-            rewardsListView.Adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem2, tempRewardList);
+            rewardsListView.Adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, tempRewardList);
             rewardsListView.ItemClick += RewardsListView_ItemClick;
         }
 
         private void RewardsListView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
+            var intent = new Intent(this, typeof(RedeemRewardActivity));
+            intent.PutExtra("uuid", rewardList[e.Position].UUID.ToString().ToUpperInvariant());
+            StartActivity(intent);
         }
     }
 }

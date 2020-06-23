@@ -9,4 +9,55 @@
         android:text="Redeem Reward:"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:layout_gravity="center"
+        android:id="@+id/qrCodeImage"
+        android:layout_width="400dp"
+        android:layout_height="400dp"/>
+
+    <TextView
+        android:textSize="16dp"
+        android:textAlignment="center"
+        android:text="Show this to the merchant for redemption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:padding="8dp"
+        android:textAlignment="center"
+        android:textSize="24dp"
+        android:text="OR"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/> 
+
+    <TextView
+        android:textAlignment="center"
+        android:text="Enter this code:"
+        android:textSize="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/codeTextView"
+        android:textAlignment="center"
+        android:text="C861B4AD-5B17-4538-B744-66B536B97C5B"
+        android:textStyle="bold"
+        android:textSize="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ProgressBar
+        android:id="@+id/loadingBar"
+        android:layout_gravity="center"
+        android:paddingTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/progressTextView"
+        android:textAlignment="center"
+        android:text="Working hard to check for validation..."
+        android:paddingTop="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

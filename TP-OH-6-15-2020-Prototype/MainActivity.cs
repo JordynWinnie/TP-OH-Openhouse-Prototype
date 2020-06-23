@@ -54,16 +54,8 @@ namespace TP_OH_6_15_2020_Prototype
 
         private async void ShortCutButton_Click(object sender, EventArgs e)
         {
-            MobileBarcodeScanner.Initialize(Application);
-            var scanner = new ZXing.Mobile.MobileBarcodeScanner();
-
-            var result = await scanner.Scan();
-
-            if (result != null)
-            {
-                Console.WriteLine("Scanned Barcode: " + result.Text);
-                Toast.MakeText(this, result.Text, ToastLength.Short).Show();
-            }
+            var intent = new Intent(this, typeof(RedeemRewardActivity));
+            StartActivity(intent);
         }
 
         private void RegisterBtn_Click(object sender, EventArgs e)

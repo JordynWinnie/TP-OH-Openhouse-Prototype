@@ -86,6 +86,7 @@
     <Compile Include="QuizListActivity.cs" />
     <Compile Include="ListViewAdapters\QuizListAdapter.cs" />
     <Compile Include="QuizSessionActivity.cs" />
+    <Compile Include="RedeemRewardActivity.cs" />
     <Compile Include="RegisterActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
