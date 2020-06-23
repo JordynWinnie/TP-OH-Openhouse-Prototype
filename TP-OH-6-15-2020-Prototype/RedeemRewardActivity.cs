@@ -4,6 +4,7 @@ using Android.Media;
 using Android.OS;
 using Android.Widget;
 using Java.IO;
+using Java.Lang;
 using System;
 using ZXing.Common;
 using ZXing.Mobile;
@@ -34,7 +35,7 @@ namespace TP_OH_6_15_2020_Prototype
 
             var timer = new System.Threading.Timer((e) =>
             {
-                CheckForValidation();
+                RunOnUiThread(new Action(CheckForValidation));
             }, null, TimeSpan.Zero, TimeSpan.FromSeconds(5));
         }
 
@@ -52,12 +53,13 @@ namespace TP_OH_6_15_2020_Prototype
         private void CloseUpActivity()
         {
             progressBar.Visibility = Android.Views.ViewStates.Gone;
+
             progressTextView.Text = "Success!";
 
             var timer = new System.Threading.Timer((e) =>
             {
                 Finish();
-            }, null, TimeSpan.Zero, TimeSpan.FromSeconds(3));
+            }, null, TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(3));
         }
 
         private void GenerateQRCode()

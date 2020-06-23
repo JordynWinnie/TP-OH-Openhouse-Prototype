@@ -49,13 +49,6 @@ namespace TP_OH_6_15_2020_Prototype
 
             loginBtn.Click += LoginBtn_Click;
             registerBtn.Click += RegisterBtn_Click;
-            shortCutButton.Click += ShortCutButton_Click;
-        }
-
-        private async void ShortCutButton_Click(object sender, EventArgs e)
-        {
-            var intent = new Intent(this, typeof(RedeemRewardActivity));
-            StartActivity(intent);
         }
 
         private void RegisterBtn_Click(object sender, EventArgs e)
@@ -75,10 +68,11 @@ namespace TP_OH_6_15_2020_Prototype
             {
                 var user = JsonConvert.DeserializeObject<UserModel>(await response.Content.ReadAsStringAsync());
                 Toast.MakeText(this, "Welcome back, " + user.username + "!", ToastLength.Short).Show();
+                emailEditText.Text = string.Empty;
+                passwordEditText.Text = string.Empty;
                 var intent = new Intent(this, typeof(MainMenuActivity));
                 intent.PutExtra("userid", user.userid);
                 StartActivity(intent);
-
                 return;
             }
             Toast.MakeText(this, "Wrong username or password", ToastLength.Short).Show();

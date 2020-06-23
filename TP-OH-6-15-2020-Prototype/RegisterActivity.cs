@@ -57,7 +57,7 @@ namespace TP_OH_6_15_2020_Prototype
                         return;
                     }
                     Toast.MakeText(this, "Registered :D", ToastLength.Short).Show();
-
+                    Finish();
                     return;
                 }
                 Toast.MakeText(this, "Registration unsuccessful", ToastLength.Short).Show();

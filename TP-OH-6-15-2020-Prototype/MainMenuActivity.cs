@@ -25,6 +25,7 @@ namespace TP_OH_6_15_2020_Prototype
         private Button findOutAboutIITBtn;
         private Button scanQRCodeBtn;
         private Button useRewardBtn;
+        private Button logOutBtn;
         private UserModel nameResponse;
 
         public static int UserId;
@@ -47,6 +48,8 @@ namespace TP_OH_6_15_2020_Prototype
             findOutAboutIITBtn = FindViewById<Button>(Resource.Id.findOutAboutIITBtn);
             scanQRCodeBtn = FindViewById<Button>(Resource.Id.scanQRCodeBtn);
             useRewardBtn = FindViewById<Button>(Resource.Id.useRewardsBtn);
+            logOutBtn = FindViewById<Button>(Resource.Id.logOutBtn);
+
             var userid = Intent.GetIntExtra("userid", -1);
             UserId = userid;
             var nameRequest = await WebRequest.HttpClient.GetAsync($"http://10.0.2.2:54888/Users/GetUserInfo?userid={userid}");
@@ -61,6 +64,13 @@ namespace TP_OH_6_15_2020_Prototype
             redeemAwardsBtn.Click += RedeemAwardsBtn_Click;
             findOutAboutIITBtn.Click += FindOutAboutIITBtn_Click;
             useRewardBtn.Click += UseRewardBtn_Click;
+            logOutBtn.Click += LogOutBtn_Click;
+        }
+
+        private void LogOutBtn_Click(object sender, EventArgs e)
+        {
+            UserId = -1;
+            Finish();
         }
 
         private void UseRewardBtn_Click(object sender, EventArgs e)

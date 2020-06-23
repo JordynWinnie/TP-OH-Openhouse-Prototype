@@ -34,6 +34,12 @@ namespace TP_OH_6_15_2020_Prototype
             DownloadRewards();
         }
 
+        protected override void OnRestart()
+        {
+            base.OnRestart();
+            DownloadRewards();
+        }
+
         private async void DownloadRewards()
         {
             var rewardRequest = await WebRequest.HttpClient.GetAsync($"http://10.0.2.2:54888/AwardRedemptions/GetReward?userID={MainMenuActivity.UserId}");
@@ -60,9 +66,16 @@ namespace TP_OH_6_15_2020_Prototype
 
         private void RewardsListView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            var intent = new Intent(this, typeof(RedeemRewardActivity));
-            intent.PutExtra("uuid", rewardList[e.Position].UUID.ToString().ToUpperInvariant());
-            StartActivity(intent);
+            if (!rewardList[e.Position].isAwardUsed)
+            {
+                var intent = new Intent(this, typeof(RedeemRewardActivity));
+                intent.PutExtra("uuid", rewardList[e.Position].UUID.ToString().ToUpperInvariant());
+                StartActivity(intent);
+            }
+            else
+            {
+                Toast.MakeText(this, "Cannot redeem something already used!", ToastLength.Short).Show();
+            }
         }
     }
 }
