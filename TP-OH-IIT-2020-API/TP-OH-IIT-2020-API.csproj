@@ -177,6 +177,7 @@
     <Compile Include="AwardsTable.cs">
       <DependentUpon>TP-OH-Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\AwardRedemptionsController.cs" />
     <Compile Include="Controllers\AwardsTablesController.cs" />
     <Compile Include="Controllers\CourseTablesController.cs" />
     <Compile Include="Controllers\EventsTablesController.cs" />
@@ -314,6 +315,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\AwardRedemptions\" />
     <Folder Include="Views\AwardsTables\" />
     <Folder Include="Views\CourseTables\" />
     <Folder Include="Views\EventsTables\" />
