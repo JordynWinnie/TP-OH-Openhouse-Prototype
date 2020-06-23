@@ -24,6 +24,7 @@ namespace TP_OH_IIT_2020_API
         public string courseName { get; set; }
         public string courseShortName { get; set; }
         public string courseCode { get; set; }
+        public string courseInfoLink { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EventsTable> EventsTables { get; set; }

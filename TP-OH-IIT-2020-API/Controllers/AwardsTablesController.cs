@@ -39,16 +39,19 @@ namespace TP_OH_IIT_2020_API.Controllers
 
             if ((award.awardLimit - redemptionCount) <= 0)
             {
+                //No more rewards of this kind left:
                 return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
 
             if (checkForRedemption)
             {
+                //User has already taken the reward:
                 return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
 
             if (user.credits < award.creditsRequired)
             {
+                //User has insufficient credits to redeem:
                 return new HttpStatusCodeResult(HttpStatusCode.NotAcceptable);
             }
 
@@ -56,7 +59,8 @@ namespace TP_OH_IIT_2020_API.Controllers
             {
                 awardIdFK = awardID,
                 useridFK = userID,
-                isAwardUsed = false
+                isAwardUsed = false,
+                UUID = Guid.NewGuid()
             };
 
             db.AwardRedemptions.Add(insertAwardRedemption);

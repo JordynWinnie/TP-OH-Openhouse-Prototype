@@ -22,6 +22,7 @@
           <Property Name="useridFK" Type="int" Nullable="false" />
           <Property Name="awardIdFK" Type="int" Nullable="false" />
           <Property Name="isAwardUsed" Type="bit" Nullable="false" />
+          <Property Name="UUID" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="AwardsTable">
           <Key>
@@ -41,6 +42,7 @@
           <Property Name="courseName" Type="varchar(max)" Nullable="false" />
           <Property Name="courseShortName" Type="varchar(max)" Nullable="false" />
           <Property Name="courseCode" Type="varchar(max)" Nullable="false" />
+          <Property Name="courseInfoLink" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="EarnedCreditsFromEventTable">
           <Key>
@@ -403,6 +405,7 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
           <NavigationProperty Name="AwardsTable" Relationship="Self.FK_AwardRedemption_AwardsTable1" FromRole="AwardRedemption" ToRole="AwardsTable" />
           <NavigationProperty Name="User" Relationship="Self.FK_AwardRedemption_User" FromRole="AwardRedemption" ToRole="User" />
           <Property Name="isAwardUsed" Type="Boolean" Nullable="false" />
+          <Property Name="UUID" Type="Guid" />
         </EntityType>
         <EntityType Name="AwardsTable">
           <Key>
@@ -738,6 +741,7 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
           <Property Name="courseShortName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="courseCode" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="EventsTables" Relationship="TPOHModel.FK_EventsTable_CourseTable" FromRole="CourseTable" ToRole="EventsTable" />
+          <Property Name="courseInfoLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_EventsTable_CourseTable">
           <End Type="TPOHModel.CourseTable" Role="CourseTable" Multiplicity="1" />
@@ -804,6 +808,7 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
           <EntitySetMapping Name="AwardRedemptions">
             <EntityTypeMapping TypeName="TPOHModel.AwardRedemption">
               <MappingFragment StoreEntitySet="AwardRedemption">
+                <ScalarProperty Name="UUID" ColumnName="UUID" />
                 <ScalarProperty Name="isAwardUsed" ColumnName="isAwardUsed" />
                 <ScalarProperty Name="redemptionID" ColumnName="redemptionID" />
                 <ScalarProperty Name="useridFK" ColumnName="useridFK" />
@@ -942,6 +947,7 @@ warning 6002: The table/view 'TP-OH-IIT-2020.dbo.mainEventTiming' does not have 
           <EntitySetMapping Name="CourseTables">
             <EntityTypeMapping TypeName="TPOHModel.CourseTable">
               <MappingFragment StoreEntitySet="CourseTable">
+                <ScalarProperty Name="courseInfoLink" ColumnName="courseInfoLink" />
                 <ScalarProperty Name="courseCode" ColumnName="courseCode" />
                 <ScalarProperty Name="courseShortName" ColumnName="courseShortName" />
                 <ScalarProperty Name="courseName" ColumnName="courseName" />
