@@ -26,7 +26,7 @@ namespace TP_OH_6_15_2020_Prototype
             base.OnCreate(savedInstanceState);
 
             // Create your application here
-            SetContentView(Resource.Layout.course_information_list_layout);
+            SetContentView(Resource.Layout.generic_information_list);
             courseListView = FindViewById<ListView>(Resource.Id.ITcoursesListView);
 
             DownloadCourseList();

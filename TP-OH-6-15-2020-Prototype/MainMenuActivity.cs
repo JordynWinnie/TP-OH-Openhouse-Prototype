@@ -65,7 +65,8 @@ namespace TP_OH_6_15_2020_Prototype
 
         private void UseRewardBtn_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            var intent = new Intent(this, typeof(UseRewardActivity));
+            StartActivity(intent);
         }
 
         private void FindOutAboutIITBtn_Click(object sender, EventArgs e)

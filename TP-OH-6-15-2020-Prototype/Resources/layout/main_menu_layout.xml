@@ -55,7 +55,7 @@
 
     <TextView
         android:textAlignment="center"
-        android:text="Prototype in Xamarin.Android, made with love\nby Jordan Khong (2020)"
+        android:text="Prototype in Xamarin.Android, made with ♥\nby Jordan Khong (2020)"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

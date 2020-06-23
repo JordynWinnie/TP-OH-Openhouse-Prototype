@@ -81,6 +81,7 @@
     <Compile Include="Models\EventTimingModel.cs" />
     <Compile Include="Models\QuizSessionModels.cs" />
     <Compile Include="Models\QuizListModel.cs" />
+    <Compile Include="Models\RedeemRewardModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="QuizListActivity.cs" />
     <Compile Include="ListViewAdapters\QuizListAdapter.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="RegisterActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UseRewardActivity.cs" />
     <Compile Include="WebRequest.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -183,7 +185,12 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\course_information_list_layout.xml">
+    <AndroidResource Include="Resources\layout\generic_information_list.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\redemption_detailed_layout.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
