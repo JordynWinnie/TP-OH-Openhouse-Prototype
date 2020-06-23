@@ -28,7 +28,8 @@ namespace TP_OH_IIT_2020_API.Controllers
                            {
                                x.awardIdFK,
                                x.isAwardUsed,
-                               x.AwardsTable.awardName
+                               x.AwardsTable.awardName,
+                               x.UUID
                            });
             return Json(rewards, JsonRequestBehavior.AllowGet);
         }
