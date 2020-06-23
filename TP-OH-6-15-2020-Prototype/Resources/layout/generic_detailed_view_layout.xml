@@ -1,4 +1,3 @@
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -9,20 +8,21 @@
         android:textSize="24dp"
         android:text="EventName"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/offeredByTextViewDetailed"
         android:textStyle="italic"
         android:text="Offered By: (Diploma Name)"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <TextView
+        android:id="@+id/eventInformationHeaderTextView"
         android:paddingTop="16dp"
         android:textSize="16dp"
         android:text="Event Information:"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
     <EditText
         android:gravity="top"
         android:id="@+id/eventInformationEditTextDetailed"
@@ -32,11 +32,11 @@
         android:cursorVisible="false"
         android:text="placeHolder"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
     <Button
         android:id="@+id/joinEventButtonDetailed"
         android:text="Join Event"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 </LinearLayout>

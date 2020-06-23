@@ -35,12 +35,21 @@ namespace TP_OH_6_15_2020_Prototype
 
         private async void DownloadAwards()
         {
-            var awardRequest = await WebRequest.HttpClient.GetAsync("http://10.0.2.2:54888/AwardsTables/GetListOfAwards");
+            var awardRequest = await WebRequest.HttpClient.GetAsync("http://10.0.2.2:54888/AwardsTables/GetAward");
             var userBalanceRequest = await WebRequest.HttpClient.GetAsync($"http://10.0.2.2:54888/Users/GetUserInfo?userid={MainMenuActivity.UserId}");
             awardList = JsonConvert.DeserializeObject<List<AwardListModel>>(await awardRequest.Content.ReadAsStringAsync());
             var userBalance = JsonConvert.DeserializeObject<UserModel>(await userBalanceRequest.Content.ReadAsStringAsync());
             rewardListView.Adapter = new AwardListAdapter(this, awardList);
             currentBalanceTextView.Text = $"Your Current Balance: {userBalance.credits}";
+
+            rewardListView.ItemClick += RewardListView_ItemClick;
+        }
+
+        private void RewardListView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        {
+            var intent = new Intent(this, typeof(AwardDetailedActivity));
+            intent.PutExtra("awardId", awardList[e.Position].awardID);
+            StartActivity(intent);
         }
     }
 }

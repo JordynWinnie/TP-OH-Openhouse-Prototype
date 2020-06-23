@@ -24,6 +24,7 @@ namespace TP_OH_6_15_2020_Prototype
         private Button redeemAwardsBtn;
         private Button findOutAboutIITBtn;
         private Button scanQRCodeBtn;
+        private Button useRewardBtn;
         private UserModel nameResponse;
 
         public static int UserId;
@@ -45,18 +46,32 @@ namespace TP_OH_6_15_2020_Prototype
             redeemAwardsBtn = FindViewById<Button>(Resource.Id.redeemAwardsBtn);
             findOutAboutIITBtn = FindViewById<Button>(Resource.Id.findOutAboutIITBtn);
             scanQRCodeBtn = FindViewById<Button>(Resource.Id.scanQRCodeBtn);
+            useRewardBtn = FindViewById<Button>(Resource.Id.useRewardsBtn);
             var userid = Intent.GetIntExtra("userid", -1);
             UserId = userid;
             var nameRequest = await WebRequest.HttpClient.GetAsync($"http://10.0.2.2:54888/Users/GetUserInfo?userid={userid}");
 
             nameResponse = JsonConvert.DeserializeObject<UserModel>(await nameRequest.Content.ReadAsStringAsync());
 
-            welcomeTextView.Text = $"Welcome to TP, {nameResponse.username}!";
+            welcomeTextView.Text = $"Welcome to IIT, {nameResponse.username}!";
 
             viewEventBtn.Click += ViewEventBtn_Click;
             takeQuizesBtn.Click += TakeQuizesBtn_Click;
             scanQRCodeBtn.Click += ScanQRCodeBtn_Click;
             redeemAwardsBtn.Click += RedeemAwardsBtn_Click;
+            findOutAboutIITBtn.Click += FindOutAboutIITBtn_Click;
+            useRewardBtn.Click += UseRewardBtn_Click;
+        }
+
+        private void UseRewardBtn_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void FindOutAboutIITBtn_Click(object sender, EventArgs e)
+        {
+            var intent = new Intent(this, typeof(ITCourseListActivity));
+            StartActivity(intent);
         }
 
         private void RedeemAwardsBtn_Click(object sender, EventArgs e)

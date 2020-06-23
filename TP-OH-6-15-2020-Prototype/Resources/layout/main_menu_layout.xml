@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:padding="8dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
@@ -35,8 +36,26 @@
         android:layout_height="wrap_content"/>
 
     <Button
+        android:id="@+id/useRewardsBtn"
+        android:text="Use Rewards"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
         android:id="@+id/scanQRCodeBtn"
         android:text="Scan QR Code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/logOutBtn"
+        android:text="Log Out"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:textAlignment="center"
+        android:text="Prototype in Xamarin.Android, made with love\nby Jordan Khong (2020)"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

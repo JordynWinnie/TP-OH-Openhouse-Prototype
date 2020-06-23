@@ -29,7 +29,7 @@ namespace TP_OH_6_15_2020_Prototype
             base.OnCreate(savedInstanceState);
 
             // Create your application here
-            SetContentView(Resource.Layout.event_detailed_view_layout);
+            SetContentView(Resource.Layout.generic_detailed_view_layout);
             InitView();
         }
 

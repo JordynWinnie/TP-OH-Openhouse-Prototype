@@ -66,7 +66,9 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AwardDetailedActivity.cs" />
     <Compile Include="AwardListActivity.cs" />
+    <Compile Include="ITCourseListActivity.cs" />
     <Compile Include="ListViewAdapters\AwardListAdapter.cs" />
     <Compile Include="DetailedEventViewActivity.cs" />
     <Compile Include="EventListActivity.cs" />
@@ -161,7 +163,7 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\event_detailed_view_layout.xml">
+    <AndroidResource Include="Resources\layout\generic_detailed_view_layout.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -177,6 +179,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\award_redemption_layout.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\course_information_list_layout.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

@@ -6,5 +6,7 @@
         public string courseName { get; set; }
         public string courseShortName { get; set; }
         public string courseCode { get; set; }
+
+        public string courseInfoLink { get; set; }
     }
 }
