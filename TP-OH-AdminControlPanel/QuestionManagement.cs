@@ -63,7 +63,63 @@ namespace TP_OH_AdminControlPanel
                     break;
 
                 case ApplicationState.ModifyQuestion:
+                    var questionID = questionList[questionCb.SelectedIndex].questionID;
+                    var questionToModify = context.QuestionsTables.Where(x => x.questionID == questionID).First();
 
+                    questionToModify.questionString = questionStringTb.Text;
+                    questionToModify.questionHint = questionHintTb.Text;
+                    questionToModify.questionTrivia = questionTriviaTb.Text;
+
+                    var answersToDelete = context.AnswersTables.Where(x => x.questionID == questionID);
+
+                    foreach (var answer in answersToDelete)
+                    {
+                        context.AnswersTables.Remove(answer);
+                    }
+
+                    if (!answerOption1Tb.Text.Equals(string.Empty))
+                    {
+                        var insertAnswer = new AnswersTable
+                        {
+                            questionID = questionID,
+                            answerString = answerOption1Tb.Text,
+                            isCorrectAnswer = optionRadio1.Checked
+                        };
+                        context.AnswersTables.Add(insertAnswer);
+                    }
+
+                    if (!answerOption2Tb.Text.Equals(string.Empty))
+                    {
+                        var insertAnswer = new AnswersTable
+                        {
+                            questionID = questionID,
+                            answerString = answerOption2Tb.Text,
+                            isCorrectAnswer = optionRadio2.Checked
+                        };
+                        context.AnswersTables.Add(insertAnswer);
+                    }
+
+                    if (!answerOption3Tb.Text.Equals(string.Empty))
+                    {
+                        var insertAnswer = new AnswersTable
+                        {
+                            questionID = questionID,
+                            answerString = answerOption3Tb.Text,
+                            isCorrectAnswer = optionRadio3.Checked
+                        };
+                        context.AnswersTables.Add(insertAnswer);
+                    }
+
+                    if (!answerOption4Tb.Text.Equals(string.Empty))
+                    {
+                        var insertAnswer = new AnswersTable
+                        {
+                            questionID = questionID,
+                            answerString = answerOption4Tb.Text,
+                            isCorrectAnswer = optionRadio4.Checked
+                        };
+                        context.AnswersTables.Add(insertAnswer);
+                    }
                     break;
 
                 case ApplicationState.RemoveQuestion:
@@ -75,6 +131,9 @@ namespace TP_OH_AdminControlPanel
                 default:
                     break;
             }
+
+            context.SaveChanges();
+            MessageBox.Show("Changes saved");
         }
 
         private void questionCb_SelectedIndexChanged(object sender, EventArgs e)
@@ -134,6 +193,7 @@ namespace TP_OH_AdminControlPanel
                         default:
                             break;
                     }
+
                     break;
 
                 case ApplicationState.RemoveQuestion:
