@@ -29,22 +29,27 @@ namespace TP_OH_AdminControlPanel
 
         private void QuestionManagement_Load(object sender, EventArgs e)
         {
+            questionList = context.QuestionsTables.Where(x => x.quizIDFK == currentQuizID).ToList();
+
+            foreach (var question in questionList)
+            {
+                questionCb.Items.Add(question.questionString);
+            }
+
             switch (applicationState)
             {
                 case ApplicationState.AddQuestion:
+                    questionCb.Visible = false;
+                    questionLbl.Visible = false;
 
                     break;
 
                 case ApplicationState.ModifyQuestion:
-                    questionList = context.QuestionsTables.Where(x => x.quizIDFK == currentQuizID).ToList();
 
-                    foreach (var question in questionList)
-                    {
-                        questionCb.Items.Add(question.questionString);
-                    }
                     break;
 
                 case ApplicationState.RemoveQuestion:
+                    questionGroup.Visible = false;
                     break;
 
                 case ApplicationState.ListQuestions:
@@ -60,6 +65,61 @@ namespace TP_OH_AdminControlPanel
             switch (applicationState)
             {
                 case ApplicationState.AddQuestion:
+                    var newQuestionID = context.QuestionsTables.OrderByDescending(x => x.questionID).Select(x => x.questionID).First() + 1;
+                    var insertQuestion = new QuestionsTable
+                    {
+                        questionID = newQuestionID,
+                        quizIDFK = currentQuizID,
+                        questionString = questionStringTb.Text,
+                        questionHint = questionHintTb.Text,
+                        questionTrivia = questionTriviaTb.Text
+                    };
+                    context.QuestionsTables.Add(insertQuestion);
+
+                    if (!answerOption1Tb.Text.Equals(string.Empty))
+                    {
+                        var insertAnswer = new AnswersTable
+                        {
+                            questionID = newQuestionID,
+                            answerString = answerOption1Tb.Text,
+                            isCorrectAnswer = optionRadio1.Checked
+                        };
+                        context.AnswersTables.Add(insertAnswer);
+                    }
+
+                    if (!answerOption2Tb.Text.Equals(string.Empty))
+                    {
+                        var insertAnswer = new AnswersTable
+                        {
+                            questionID = newQuestionID,
+                            answerString = answerOption2Tb.Text,
+                            isCorrectAnswer = optionRadio2.Checked
+                        };
+                        context.AnswersTables.Add(insertAnswer);
+                    }
+
+                    if (!answerOption3Tb.Text.Equals(string.Empty))
+                    {
+                        var insertAnswer = new AnswersTable
+                        {
+                            questionID = newQuestionID,
+                            answerString = answerOption3Tb.Text,
+                            isCorrectAnswer = optionRadio3.Checked
+                        };
+                        context.AnswersTables.Add(insertAnswer);
+                    }
+
+                    if (!answerOption4Tb.Text.Equals(string.Empty))
+                    {
+                        var insertAnswer = new AnswersTable
+                        {
+                            questionID = newQuestionID,
+                            answerString = answerOption4Tb.Text,
+                            isCorrectAnswer = optionRadio4.Checked
+                        };
+                        context.AnswersTables.Add(insertAnswer);
+                    }
+
                     break;
 
                 case ApplicationState.ModifyQuestion:
@@ -123,6 +183,17 @@ namespace TP_OH_AdminControlPanel
                     break;
 
                 case ApplicationState.RemoveQuestion:
+                    var questionToRemoveID = questionList[questionCb.SelectedIndex].questionID;
+                    var questionToRemove = context.QuestionsTables.Where(x => x.questionID == questionToRemoveID).First();
+
+                    var answersToRemove = context.AnswersTables.Where(x => x.questionID == questionToRemoveID);
+
+                    foreach (var answer in answersToRemove)
+                    {
+                        context.AnswersTables.Remove(answer);
+                    }
+                    context.QuestionsTables.Remove(questionToRemove);
+
                     break;
 
                 case ApplicationState.ListQuestions:
