@@ -16,7 +16,7 @@ namespace TP_OH_AdminControlPanel
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new EventManagementForm());
+            Application.Run(new MainMenuForm());
         }
     }
 }

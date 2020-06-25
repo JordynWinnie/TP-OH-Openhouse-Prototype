@@ -16,5 +16,19 @@ namespace TP_OH_AdminControlPanel
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Hide();
+            (new EventManagementForm()).ShowDialog();
+            Show();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Hide();
+            (new QRCodeGeneration()).ShowDialog();
+            Show();
+        }
     }
 }
