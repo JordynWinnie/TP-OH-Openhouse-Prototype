@@ -31,8 +31,6 @@ namespace TP_OH_AdminControlPanel
             {
                 eventCB.Items.Add($"{program.eventName} - ({program.CourseTable.courseShortName})");
             }
-
-            eventCB.SelectedIndex = 0;
         }
 
         private void qrCodePhoto_Click(object sender, EventArgs e)

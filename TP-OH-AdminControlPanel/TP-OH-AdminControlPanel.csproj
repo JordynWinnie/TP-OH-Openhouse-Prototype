@@ -97,6 +97,12 @@
     <Compile Include="EditEventDetails.Designer.cs">
       <DependentUpon>EditEventDetails.cs</DependentUpon>
     </Compile>
+    <Compile Include="EditQuizDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditQuizDetails.Designer.cs">
+      <DependentUpon>EditQuizDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="EventManagementForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,6 +138,12 @@
     <Compile Include="QRCodeGeneration.Designer.cs">
       <DependentUpon>QRCodeGeneration.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuestionManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuestionManagement.Designer.cs">
+      <DependentUpon>QuestionManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuestionsTable.cs">
       <DependentUpon>TPOHModel.tt</DependentUpon>
     </Compile>
@@ -140,6 +152,12 @@
     </Compile>
     <Compile Include="QuizEarnedCredit.cs">
       <DependentUpon>TPOHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="QuizManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuizManagement.Designer.cs">
+      <DependentUpon>QuizManagement.cs</DependentUpon>
     </Compile>
     <Compile Include="QuizTable.cs">
       <DependentUpon>TPOHModel.tt</DependentUpon>
@@ -180,6 +198,9 @@
     <EmbeddedResource Include="EditEventDetails.resx">
       <DependentUpon>EditEventDetails.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EditQuizDetails.resx">
+      <DependentUpon>EditQuizDetails.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EventManagementForm.resx">
       <DependentUpon>EventManagementForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -200,6 +221,12 @@
     </Compile>
     <EmbeddedResource Include="QRCodeGeneration.resx">
       <DependentUpon>QRCodeGeneration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuestionManagement.resx">
+      <DependentUpon>QuestionManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuizManagement.resx">
+      <DependentUpon>QuizManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TimingControllerForm.resx">
       <DependentUpon>TimingControllerForm.cs</DependentUpon>

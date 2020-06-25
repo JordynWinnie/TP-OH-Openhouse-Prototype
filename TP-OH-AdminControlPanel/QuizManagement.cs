@@ -16,5 +16,45 @@ namespace TP_OH_AdminControlPanel
         {
             InitializeComponent();
         }
+
+        private TPOHEntities context = new TPOHEntities();
+
+        private void QuizManagement_Load(object sender, EventArgs e)
+        {
+            var columns = new List<string>()
+            {
+                "Quiz Name", "Quiz Description", "Credits", "QuestionCount","quizID"
+            };
+
+            foreach (var column in columns)
+            {
+                currentQuizesDGV.Columns.Add(column, column);
+            }
+            RefreshData();
+        }
+
+        private void RefreshData()
+        {
+            currentQuizesDGV.Rows.Clear();
+            var quizList = context.QuizTables;
+
+            foreach (var quiz in quizList)
+            {
+                var row = new List<string>()
+                {
+                    quiz.quizName,
+                    quiz.quizDescription,
+                    quiz.quizCredits.ToString(),
+                    quiz.QuestionsTables.Count.ToString(),
+                    quiz.quizID.ToString()
+                };
+                currentQuizesDGV.Rows.Add(row.ToArray());
+            }
+        }
+
+        private void currentQuizesDGV_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var quizID = int.Parse(currentQuizesDGV.Rows[e.RowIndex].Cells[4].Value.ToString());
+        }
     }
 }
