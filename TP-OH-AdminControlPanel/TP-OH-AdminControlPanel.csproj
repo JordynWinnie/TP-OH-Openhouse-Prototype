@@ -141,6 +141,12 @@
     <Compile Include="sysdiagram.cs">
       <DependentUpon>TPOHModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="TimingControllerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TimingControllerForm.Designer.cs">
+      <DependentUpon>TimingControllerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="TPOHModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -180,6 +186,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="TimingControllerForm.resx">
+      <DependentUpon>TimingControllerForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

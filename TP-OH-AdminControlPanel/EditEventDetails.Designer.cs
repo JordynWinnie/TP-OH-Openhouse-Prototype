@@ -44,6 +44,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.evtCredits)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,7 +72,7 @@
             // 
             this.evtNameTb.Location = new System.Drawing.Point(119, 37);
             this.evtNameTb.Name = "evtNameTb";
-            this.evtNameTb.Size = new System.Drawing.Size(607, 20);
+            this.evtNameTb.Size = new System.Drawing.Size(511, 20);
             this.evtNameTb.TabIndex = 3;
             // 
             // evtDescTb
@@ -78,7 +80,7 @@
             this.evtDescTb.Location = new System.Drawing.Point(119, 99);
             this.evtDescTb.Multiline = true;
             this.evtDescTb.Name = "evtDescTb";
-            this.evtDescTb.Size = new System.Drawing.Size(607, 114);
+            this.evtDescTb.Size = new System.Drawing.Size(511, 114);
             this.evtDescTb.TabIndex = 5;
             // 
             // label3
@@ -109,7 +111,7 @@
             0,
             0});
             this.evtCredits.Name = "evtCredits";
-            this.evtCredits.Size = new System.Drawing.Size(607, 20);
+            this.evtCredits.Size = new System.Drawing.Size(511, 20);
             this.evtCredits.TabIndex = 7;
             this.evtCredits.Value = new decimal(new int[] {
             10,
@@ -130,7 +132,7 @@
             // 
             this.evtQRCode.Location = new System.Drawing.Point(119, 289);
             this.evtQRCode.Name = "evtQRCode";
-            this.evtQRCode.Size = new System.Drawing.Size(607, 20);
+            this.evtQRCode.Size = new System.Drawing.Size(511, 20);
             this.evtQRCode.TabIndex = 11;
             // 
             // label5
@@ -145,7 +147,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(14, 344);
+            this.label6.Location = new System.Drawing.Point(14, 335);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(83, 13);
             this.label6.TabIndex = 12;
@@ -153,9 +155,10 @@
             // 
             // timeLabel
             // 
-            this.timeLabel.Location = new System.Drawing.Point(14, 380);
+            this.timeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timeLabel.Location = new System.Drawing.Point(14, 357);
             this.timeLabel.Name = "timeLabel";
-            this.timeLabel.Size = new System.Drawing.Size(563, 210);
+            this.timeLabel.Size = new System.Drawing.Size(186, 255);
             this.timeLabel.TabIndex = 13;
             this.timeLabel.Text = "<CurrentTimings>";
             // 
@@ -165,7 +168,7 @@
             this.courseCB.FormattingEnabled = true;
             this.courseCB.Location = new System.Drawing.Point(119, 63);
             this.courseCB.Name = "courseCB";
-            this.courseCB.Size = new System.Drawing.Size(607, 21);
+            this.courseCB.Size = new System.Drawing.Size(511, 21);
             this.courseCB.TabIndex = 14;
             // 
             // label7
@@ -179,36 +182,61 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(583, 380);
+            this.button1.Location = new System.Drawing.Point(206, 357);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(143, 42);
             this.button1.TabIndex = 16;
             this.button1.Text = "Add Timings";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(583, 428);
+            this.button2.Location = new System.Drawing.Point(206, 405);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(143, 42);
             this.button2.TabIndex = 17;
             this.button2.Text = "Remove Timings";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(583, 476);
+            this.button3.Location = new System.Drawing.Point(206, 453);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(143, 42);
             this.button3.TabIndex = 18;
             this.button3.Text = "Edit Timings";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // saveButton
+            // 
+            this.saveButton.Location = new System.Drawing.Point(416, 531);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(214, 81);
+            this.saveButton.TabIndex = 19;
+            this.saveButton.Text = "Save Changes";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(206, 501);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(143, 42);
+            this.button5.TabIndex = 20;
+            this.button5.Text = "View Full Timings";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // EditEventDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(744, 621);
+            this.ClientSize = new System.Drawing.Size(647, 621);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.saveButton);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -252,5 +280,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.Button button5;
     }
 }

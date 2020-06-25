@@ -30,6 +30,12 @@ namespace TP_OH_AdminControlPanel
             {
                 currentEventsDGV.Columns.Add(column, column);
             }
+            RefreshData();
+        }
+
+        private void RefreshData()
+        {
+            currentEventsDGV.Rows.Clear();
 
             var events = from x in context.EventsTables
                          select new
@@ -99,7 +105,11 @@ namespace TP_OH_AdminControlPanel
                 }
             }
 
-            MessageBox.Show(sb.ToString());
+            //MessageBox.Show(sb.ToString());
+            Hide();
+            (new EditEventDetails(eventID)).ShowDialog();
+            RefreshData();
+            Show();
         }
     }
 }

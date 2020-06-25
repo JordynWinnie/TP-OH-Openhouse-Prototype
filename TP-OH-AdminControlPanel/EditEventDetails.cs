@@ -12,23 +12,33 @@ namespace TP_OH_AdminControlPanel
 {
     public partial class EditEventDetails : Form
     {
-        public EditEventDetails()
+        public EditEventDetails(int eventID)
         {
+            currentEventID = eventID;
             InitializeComponent();
         }
 
         public TPOHEntities context = new TPOHEntities();
+        private int currentEventID;
+        private List<CourseTable> courseList;
 
         private void EditEventDetails_Load(object sender, EventArgs e)
 
         {
-            courseCB.Items.AddRange(context.CourseTables.Select(x => x.courseName).ToArray());
+            LoadDetails();
+        }
+
+        private void LoadDetails()
+        {
+            courseCB.Items.Clear();
+            courseList = context.CourseTables.ToList();
+            courseCB.Items.AddRange(courseList.Select(x => x.courseName).ToArray());
             StringBuilder sb = new StringBuilder();
 
             //var eventID = int.Parse(currentEventsDGV.Rows[e.RowIndex].Cells[5].Value.ToString());
 
             var currentEvent = (from x in context.EventsTables
-                                where x.eventID == 1
+                                where x.eventID == currentEventID
                                 select new
                                 {
                                     x.eventID,
@@ -66,6 +76,47 @@ namespace TP_OH_AdminControlPanel
                 sb.AppendLine("\n");
             }
             timeLabel.Text = sb.ToString();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Hide();
+            (new TimingControllerForm(TimingControllerForm.ApplicationState.AddingTime, currentEventID)).ShowDialog();
+            LoadDetails();
+            Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Hide();
+            (new TimingControllerForm(TimingControllerForm.ApplicationState.RemovingTime, currentEventID)).ShowDialog();
+            LoadDetails();
+            Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Hide();
+            (new TimingControllerForm(TimingControllerForm.ApplicationState.EditingTime, currentEventID)).ShowDialog();
+            LoadDetails();
+            Show();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(timeLabel.Text);
+        }
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            var eventToModify = context.EventsTables.Where(x => x.eventID == currentEventID).First();
+            eventToModify.eventName = evtNameTb.Text;
+            eventToModify.courseIDFK = courseList[courseCB.SelectedIndex].courseID;
+            eventToModify.eventDescription = evtDescTb.Text;
+            eventToModify.creditsToEarn = (int)evtCredits.Value;
+            eventToModify.qrCodeString = evtQRCode.Text;
+
+            context.SaveChanges();
         }
     }
 }
