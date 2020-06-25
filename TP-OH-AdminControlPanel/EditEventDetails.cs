@@ -12,8 +12,13 @@ namespace TP_OH_AdminControlPanel
 {
     public partial class EditEventDetails : Form
     {
-        public EditEventDetails(int eventID)
+        public enum AppState { CreateNew, EditCurrent }
+
+        public AppState applicationState { get; set; }
+
+        public EditEventDetails(int eventID, AppState appState)
         {
+            applicationState = appState;
             currentEventID = eventID;
             InitializeComponent();
         }
@@ -25,7 +30,31 @@ namespace TP_OH_AdminControlPanel
         private void EditEventDetails_Load(object sender, EventArgs e)
 
         {
-            LoadDetails();
+            switch (applicationState)
+            {
+                case AppState.CreateNew:
+                    eventHeader.Text = "Add New Event:";
+                    courseCB.Items.Clear();
+                    courseList = context.CourseTables.ToList();
+                    courseCB.Items.AddRange(courseList.Select(x => x.courseName).ToArray());
+                    courseCB.SelectedIndex = 0;
+
+                    addTimingBtn.Visible = false;
+                    editTimingBtn.Visible = false;
+                    removeTimingBtn.Visible = false;
+                    viewFullTimingBtn.Visible = false;
+                    currentTimingLbl.Visible = false;
+                    timeLabel.Visible = false;
+                    break;
+
+                case AppState.EditCurrent:
+                    helperText.Visible = false;
+                    LoadDetails();
+                    break;
+
+                default:
+                    break;
+            }
         }
 
         private void LoadDetails()
@@ -109,14 +138,36 @@ namespace TP_OH_AdminControlPanel
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            var eventToModify = context.EventsTables.Where(x => x.eventID == currentEventID).First();
-            eventToModify.eventName = evtNameTb.Text;
-            eventToModify.courseIDFK = courseList[courseCB.SelectedIndex].courseID;
-            eventToModify.eventDescription = evtDescTb.Text;
-            eventToModify.creditsToEarn = (int)evtCredits.Value;
-            eventToModify.qrCodeString = evtQRCode.Text;
+            switch (applicationState)
+            {
+                case AppState.CreateNew:
+                    var insertEvent = new EventsTable
+                    {
+                        eventName = evtNameTb.Text,
+                        courseIDFK = courseList[courseCB.SelectedIndex].courseID,
+                        eventDescription = evtDescTb.Text,
+                        creditsToEarn = (int)evtCredits.Value,
+                        qrCodeString = evtQRCode.Text
+                    };
+                    context.EventsTables.Add(insertEvent);
+
+                    break;
+
+                case AppState.EditCurrent:
+                    var eventToModify = context.EventsTables.Where(x => x.eventID == currentEventID).First();
+                    eventToModify.eventName = evtNameTb.Text;
+                    eventToModify.courseIDFK = courseList[courseCB.SelectedIndex].courseID;
+                    eventToModify.eventDescription = evtDescTb.Text;
+                    eventToModify.creditsToEarn = (int)evtCredits.Value;
+                    eventToModify.qrCodeString = evtQRCode.Text;
+                    break;
+
+                default:
+                    break;
+            }
 
             context.SaveChanges();
+            MessageBox.Show("Changes saved.");
         }
     }
 }

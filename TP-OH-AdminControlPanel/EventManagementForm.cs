@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TP_OH_AdminControlPanel
@@ -107,7 +104,19 @@ namespace TP_OH_AdminControlPanel
 
             //MessageBox.Show(sb.ToString());
             Hide();
-            (new EditEventDetails(eventID)).ShowDialog();
+            (new EditEventDetails(eventID, EditEventDetails.AppState.EditCurrent)).ShowDialog();
+            RefreshData();
+            Show();
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Hide();
+            (new EditEventDetails(-1, EditEventDetails.AppState.CreateNew)).ShowDialog();
             RefreshData();
             Show();
         }

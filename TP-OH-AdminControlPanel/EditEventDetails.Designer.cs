@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.eventHeader = new System.Windows.Forms.Label();
             this.evtNameTb = new System.Windows.Forms.TextBox();
             this.evtDescTb = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -37,15 +37,16 @@
             this.label4 = new System.Windows.Forms.Label();
             this.evtQRCode = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.currentTimingLbl = new System.Windows.Forms.Label();
             this.timeLabel = new System.Windows.Forms.Label();
             this.courseCB = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.addTimingBtn = new System.Windows.Forms.Button();
+            this.removeTimingBtn = new System.Windows.Forms.Button();
+            this.editTimingBtn = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.viewFullTimingBtn = new System.Windows.Forms.Button();
+            this.helperText = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.evtCredits)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,15 +59,15 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Event Name:";
             // 
-            // label2
+            // eventHeader
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(12, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(188, 25);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Edit Event Details:";
+            this.eventHeader.AutoSize = true;
+            this.eventHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.eventHeader.Location = new System.Drawing.Point(12, 9);
+            this.eventHeader.Name = "eventHeader";
+            this.eventHeader.Size = new System.Drawing.Size(188, 25);
+            this.eventHeader.TabIndex = 2;
+            this.eventHeader.Text = "Edit Event Details:";
             // 
             // evtNameTb
             // 
@@ -144,14 +145,14 @@
             this.label5.TabIndex = 10;
             this.label5.Text = "QR Code String:";
             // 
-            // label6
+            // currentTimingLbl
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(14, 335);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(83, 13);
-            this.label6.TabIndex = 12;
-            this.label6.Text = "Current Timings:";
+            this.currentTimingLbl.AutoSize = true;
+            this.currentTimingLbl.Location = new System.Drawing.Point(14, 335);
+            this.currentTimingLbl.Name = "currentTimingLbl";
+            this.currentTimingLbl.Size = new System.Drawing.Size(83, 13);
+            this.currentTimingLbl.TabIndex = 12;
+            this.currentTimingLbl.Text = "Current Timings:";
             // 
             // timeLabel
             // 
@@ -180,39 +181,39 @@
             this.label7.TabIndex = 15;
             this.label7.Text = "Course:";
             // 
-            // button1
+            // addTimingBtn
             // 
-            this.button1.Location = new System.Drawing.Point(206, 357);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(143, 42);
-            this.button1.TabIndex = 16;
-            this.button1.Text = "Add Timings";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.addTimingBtn.Location = new System.Drawing.Point(206, 357);
+            this.addTimingBtn.Name = "addTimingBtn";
+            this.addTimingBtn.Size = new System.Drawing.Size(143, 42);
+            this.addTimingBtn.TabIndex = 16;
+            this.addTimingBtn.Text = "Add Timings";
+            this.addTimingBtn.UseVisualStyleBackColor = true;
+            this.addTimingBtn.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
+            // removeTimingBtn
             // 
-            this.button2.Location = new System.Drawing.Point(206, 405);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(143, 42);
-            this.button2.TabIndex = 17;
-            this.button2.Text = "Remove Timings";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.removeTimingBtn.Location = new System.Drawing.Point(206, 405);
+            this.removeTimingBtn.Name = "removeTimingBtn";
+            this.removeTimingBtn.Size = new System.Drawing.Size(143, 42);
+            this.removeTimingBtn.TabIndex = 17;
+            this.removeTimingBtn.Text = "Remove Timings";
+            this.removeTimingBtn.UseVisualStyleBackColor = true;
+            this.removeTimingBtn.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button3
+            // editTimingBtn
             // 
-            this.button3.Location = new System.Drawing.Point(206, 453);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(143, 42);
-            this.button3.TabIndex = 18;
-            this.button3.Text = "Edit Timings";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.editTimingBtn.Location = new System.Drawing.Point(206, 453);
+            this.editTimingBtn.Name = "editTimingBtn";
+            this.editTimingBtn.Size = new System.Drawing.Size(143, 42);
+            this.editTimingBtn.TabIndex = 18;
+            this.editTimingBtn.Text = "Edit Timings";
+            this.editTimingBtn.UseVisualStyleBackColor = true;
+            this.editTimingBtn.Click += new System.EventHandler(this.button3_Click);
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(416, 531);
+            this.saveButton.Location = new System.Drawing.Point(416, 357);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(214, 81);
             this.saveButton.TabIndex = 19;
@@ -220,30 +221,40 @@
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
-            // button5
+            // viewFullTimingBtn
             // 
-            this.button5.Location = new System.Drawing.Point(206, 501);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(143, 42);
-            this.button5.TabIndex = 20;
-            this.button5.Text = "View Full Timings";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.viewFullTimingBtn.Location = new System.Drawing.Point(206, 501);
+            this.viewFullTimingBtn.Name = "viewFullTimingBtn";
+            this.viewFullTimingBtn.Size = new System.Drawing.Size(143, 42);
+            this.viewFullTimingBtn.TabIndex = 20;
+            this.viewFullTimingBtn.Text = "View Full Timings";
+            this.viewFullTimingBtn.UseVisualStyleBackColor = true;
+            this.viewFullTimingBtn.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // helperText
+            // 
+            this.helperText.AutoSize = true;
+            this.helperText.Location = new System.Drawing.Point(384, 335);
+            this.helperText.Name = "helperText";
+            this.helperText.Size = new System.Drawing.Size(246, 13);
+            this.helperText.TabIndex = 21;
+            this.helperText.Text = "Use Edit Function to add timings to this new event.";
             // 
             // EditEventDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(647, 621);
-            this.Controls.Add(this.button5);
+            this.Controls.Add(this.helperText);
+            this.Controls.Add(this.viewFullTimingBtn);
             this.Controls.Add(this.saveButton);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.editTimingBtn);
+            this.Controls.Add(this.removeTimingBtn);
+            this.Controls.Add(this.addTimingBtn);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.courseCB);
             this.Controls.Add(this.timeLabel);
-            this.Controls.Add(this.label6);
+            this.Controls.Add(this.currentTimingLbl);
             this.Controls.Add(this.evtQRCode);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -251,7 +262,7 @@
             this.Controls.Add(this.evtDescTb);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.evtNameTb);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.eventHeader);
             this.Controls.Add(this.label1);
             this.Name = "EditEventDetails";
             this.Text = "EditEventDetails";
@@ -265,7 +276,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label eventHeader;
         private System.Windows.Forms.TextBox evtNameTb;
         private System.Windows.Forms.TextBox evtDescTb;
         private System.Windows.Forms.Label label3;
@@ -273,14 +284,15 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox evtQRCode;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label currentTimingLbl;
         private System.Windows.Forms.Label timeLabel;
         private System.Windows.Forms.ComboBox courseCB;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button addTimingBtn;
+        private System.Windows.Forms.Button removeTimingBtn;
+        private System.Windows.Forms.Button editTimingBtn;
         private System.Windows.Forms.Button saveButton;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button viewFullTimingBtn;
+        private System.Windows.Forms.Label helperText;
     }
 }
