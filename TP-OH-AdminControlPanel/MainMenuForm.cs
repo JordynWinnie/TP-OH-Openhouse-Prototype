@@ -58,5 +58,19 @@ namespace TP_OH_AdminControlPanel
             (new ApproveRewardTransaction()).ShowDialog();
             Show();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Hide();
+            (new QuizManagement()).ShowDialog();
+            Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Hide();
+            (new ManageRewards()).ShowDialog();
+            Show();
+        }
     }
 }
