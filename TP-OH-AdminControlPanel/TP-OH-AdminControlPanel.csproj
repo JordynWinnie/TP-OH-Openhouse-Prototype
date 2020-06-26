@@ -79,6 +79,12 @@
     <Compile Include="AnswersTable.cs">
       <DependentUpon>TPOHModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ApproveRewardTransaction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ApproveRewardTransaction.Designer.cs">
+      <DependentUpon>ApproveRewardTransaction.cs</DependentUpon>
+    </Compile>
     <Compile Include="AwardRedemption.cs">
       <DependentUpon>TPOHModel.tt</DependentUpon>
     </Compile>
@@ -219,6 +225,9 @@
     <Compile Include="User.cs">
       <DependentUpon>TPOHModel.tt</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ApproveRewardTransaction.resx">
+      <DependentUpon>ApproveRewardTransaction.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EditEventDetails.resx">
       <DependentUpon>EditEventDetails.cs</DependentUpon>
     </EmbeddedResource>

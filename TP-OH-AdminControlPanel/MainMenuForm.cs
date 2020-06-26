@@ -51,5 +51,12 @@ namespace TP_OH_AdminControlPanel
             (new MainEntryRemovals(MainEntryRemovals.ApplicationState.RemoveQuiz)).ShowDialog();
             Show();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Hide();
+            (new ApproveRewardTransaction()).ShowDialog();
+            Show();
+        }
     }
 }
