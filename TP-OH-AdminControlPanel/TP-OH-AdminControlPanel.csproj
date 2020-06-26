@@ -103,6 +103,12 @@
     <Compile Include="EditQuizDetails.Designer.cs">
       <DependentUpon>EditQuizDetails.cs</DependentUpon>
     </Compile>
+    <Compile Include="EditRewardDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditRewardDetails.Designer.cs">
+      <DependentUpon>EditRewardDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="EventManagementForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,11 +121,17 @@
     <Compile Include="EventTiming.cs">
       <DependentUpon>TPOHModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainEntryRemovals.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainEntryRemovals.Designer.cs">
+      <DependentUpon>MainEntryRemovals.cs</DependentUpon>
     </Compile>
     <Compile Include="mainEventTiming.cs">
       <DependentUpon>TPOHModel.tt</DependentUpon>
@@ -129,6 +141,12 @@
     </Compile>
     <Compile Include="MainMenuForm.Designer.cs">
       <DependentUpon>MainMenuForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ManageRewards.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManageRewards.Designer.cs">
+      <DependentUpon>ManageRewards.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -207,14 +225,23 @@
     <EmbeddedResource Include="EditQuizDetails.resx">
       <DependentUpon>EditQuizDetails.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EditRewardDetails.resx">
+      <DependentUpon>EditRewardDetails.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EventManagementForm.resx">
       <DependentUpon>EventManagementForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainEntryRemovals.resx">
+      <DependentUpon>MainEntryRemovals.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainMenuForm.resx">
       <DependentUpon>MainMenuForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManageRewards.resx">
+      <DependentUpon>ManageRewards.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

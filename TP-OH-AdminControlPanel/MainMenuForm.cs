@@ -30,5 +30,26 @@ namespace TP_OH_AdminControlPanel
             (new QRCodeGeneration()).ShowDialog();
             Show();
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Hide();
+            (new MainEntryRemovals(MainEntryRemovals.ApplicationState.RemoveEvent)).ShowDialog();
+            Show();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Hide();
+            (new MainEntryRemovals(MainEntryRemovals.ApplicationState.RemoveReward)).ShowDialog();
+            Show();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            Hide();
+            (new MainEntryRemovals(MainEntryRemovals.ApplicationState.RemoveQuiz)).ShowDialog();
+            Show();
+        }
     }
 }
