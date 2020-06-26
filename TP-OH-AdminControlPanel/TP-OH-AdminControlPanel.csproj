@@ -138,6 +138,12 @@
     <Compile Include="QRCodeGeneration.Designer.cs">
       <DependentUpon>QRCodeGeneration.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuestionListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuestionListForm.Designer.cs">
+      <DependentUpon>QuestionListForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuestionManagement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -221,6 +227,9 @@
     </Compile>
     <EmbeddedResource Include="QRCodeGeneration.resx">
       <DependentUpon>QRCodeGeneration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuestionListForm.resx">
+      <DependentUpon>QuestionListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuestionManagement.resx">
       <DependentUpon>QuestionManagement.cs</DependentUpon>

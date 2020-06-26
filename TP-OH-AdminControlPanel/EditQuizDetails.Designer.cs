@@ -36,10 +36,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.saveBtn = new System.Windows.Forms.Button();
             this.quizGroupBox = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.quizCredits)).BeginInit();
             this.quizGroupBox.SuspendLayout();
             this.SuspendLayout();
@@ -136,23 +136,15 @@
             this.quizGroupBox.TabStop = false;
             this.quizGroupBox.Text = "Question Management";
             // 
-            // button2
+            // button5
             // 
-            this.button2.Location = new System.Drawing.Point(19, 19);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(125, 40);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "Add Question";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(150, 19);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(125, 40);
-            this.button3.TabIndex = 1;
-            this.button3.Text = "Remove Question";
-            this.button3.UseVisualStyleBackColor = true;
+            this.button5.Location = new System.Drawing.Point(412, 19);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(125, 40);
+            this.button5.TabIndex = 3;
+            this.button5.Text = "View All Questions";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button4
             // 
@@ -162,15 +154,27 @@
             this.button4.TabIndex = 2;
             this.button4.Text = "Change Question";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // button5
+            // button3
             // 
-            this.button5.Location = new System.Drawing.Point(412, 19);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(125, 40);
-            this.button5.TabIndex = 3;
-            this.button5.Text = "View All Questions";
-            this.button5.UseVisualStyleBackColor = true;
+            this.button3.Location = new System.Drawing.Point(150, 19);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(125, 40);
+            this.button3.TabIndex = 1;
+            this.button3.Text = "Remove Question";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(19, 19);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(125, 40);
+            this.button2.TabIndex = 0;
+            this.button2.Text = "Add Question";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // EditQuizDetails
             // 

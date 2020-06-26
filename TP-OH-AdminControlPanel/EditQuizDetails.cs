@@ -75,6 +75,35 @@ namespace TP_OH_AdminControlPanel
 
             context.SaveChanges();
             MessageBox.Show("Changes saved");
+            Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Hide();
+            (new QuestionManagement(currentQuizID, QuestionManagement.ApplicationState.AddQuestion)).ShowDialog();
+            Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Hide();
+            (new QuestionManagement(currentQuizID, QuestionManagement.ApplicationState.RemoveQuestion)).ShowDialog();
+            Show();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Hide();
+            (new QuestionManagement(currentQuizID, QuestionManagement.ApplicationState.ModifyQuestion)).ShowDialog();
+            Show();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Hide();
+            (new QuestionListForm(currentQuizID)).ShowDialog();
+            Show();
         }
     }
 }

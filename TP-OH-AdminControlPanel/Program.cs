@@ -16,7 +16,7 @@ namespace TP_OH_AdminControlPanel
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new QuestionManagement(1, QuestionManagement.ApplicationState.ModifyQuestion));
+            Application.Run(new QuizManagement());
         }
     }
 }

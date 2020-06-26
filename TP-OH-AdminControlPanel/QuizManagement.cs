@@ -55,6 +55,18 @@ namespace TP_OH_AdminControlPanel
         private void currentQuizesDGV_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             var quizID = int.Parse(currentQuizesDGV.Rows[e.RowIndex].Cells[4].Value.ToString());
+            Hide();
+            (new EditQuizDetails(quizID, EditQuizDetails.ApplicationState.EditQuiz)).ShowDialog();
+            RefreshData();
+            Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Hide();
+            (new EditQuizDetails(-1, EditQuizDetails.ApplicationState.AddQuiz)).ShowDialog();
+            RefreshData();
+            Show();
         }
     }
 }
