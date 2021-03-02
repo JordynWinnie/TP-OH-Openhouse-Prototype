@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="af11ef81481344b5b78cbb0688d8f728" Name="Diagram1">
+        <EntityTypeShape EntityType="TPOHModel.AnswersTable" Width="1.5" PointX="5.25" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPOHModel.AwardRedemption" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPOHModel.AwardsTable" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPOHModel.EarnedCreditsFromEventTable" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPOHModel.EventsTable" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPOHModel.EventTiming" Width="1.5" PointX="3" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPOHModel.QuestionsTable" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPOHModel.QuizAttempt" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPOHModel.QuizTable" Width="1.5" PointX="0.75" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPOHModel.sysdiagram" Width="1.5" PointX="5.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPOHModel.User" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <AssociationConnector Association="TPOHModel.FK_AnswersTable_QuestionsTable" ManuallyRouted="false" />
+        <AssociationConnector Association="TPOHModel.FK_AwardRedemption_AwardsTable1" ManuallyRouted="false" />
+        <AssociationConnector Association="TPOHModel.FK_AwardRedemption_User" ManuallyRouted="false" />
+        <AssociationConnector Association="TPOHModel.FK_EarnedCreditsFromEventTable_EventsTable" ManuallyRouted="false" />
+        <AssociationConnector Association="TPOHModel.FK_EarnedCreditsFromEventTable_User" ManuallyRouted="false" />
+        <AssociationConnector Association="TPOHModel.FK_EventTimings_EventsTable" ManuallyRouted="false" />
+        <AssociationConnector Association="TPOHModel.FK_QuestionsTable_QuizTable" ManuallyRouted="false" />
+        <AssociationConnector Association="TPOHModel.FK_QuizAttempts_QuizTable" ManuallyRouted="false" />
+        <AssociationConnector Association="TPOHModel.FK_QuizAttempts_User" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TPOHModel.mainEventTiming" Width="1.5" PointX="5.375" PointY="4.75" />
+        <EntityTypeShape EntityType="TPOHModel.CourseTable" Width="1.5" PointX="0.75" PointY="15.125" />
+        <AssociationConnector Association="TPOHModel.FK_EventsTable_CourseTable" />
+        <EntityTypeShape EntityType="TPOHModel.QuizEarnedCredit" Width="1.5" PointX="6" PointY="8.5" />
+        <AssociationConnector Association="TPOHModel.FK_QuizEarnedCredits_QuizTable" />
+        <AssociationConnector Association="TPOHModel.FK_QuizEarnedCredits_User" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
